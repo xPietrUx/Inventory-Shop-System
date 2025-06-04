@@ -1,0 +1,28 @@
+services:
+    db:
+        image: mysql:8.0.33
+        environment:
+            MYSQL_ROOT_PASSWORD: admin
+            MYSQL_DATABASE: inventory_shop_system_db
+        volumes:
+            - mysql_data:/var/lib/mysql
+
+    app:
+        build: .
+        depends_on:
+            - db
+        ports:
+            - 80:8000
+
+        develop:
+            watch:
+                - action: sync
+                  path: .
+                  target: /app
+                - action: rebuild
+                  path: requirements.txt
+                - action: rebuild
+                  path: Dockerfile
+
+volumes:
+    mysql_data:
