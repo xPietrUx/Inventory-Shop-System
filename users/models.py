@@ -22,4 +22,4 @@ class Users(AbstractUser):
     )
 
     def __str__(self):
-        return f"{self.Name} {self.Surname} na stanowisku: {self.position}"
+        return f"{self.name} {self.surname} na stanowisku: {self.position}"
