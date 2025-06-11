@@ -13,11 +13,13 @@ class Roles(models.Model):
 
 
 class Users(AbstractUser):
-    name = models.CharField()
-    surname = models.CharField()
+    name = models.CharField(max_length=255)
+    surname = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
-    position = models.CharField()
-    id_role = models.ForeignKey("Role", on_delete=models.PROTECT, null=True, blank=True)
+    position = models.CharField(max_length=255)
+    id_role = models.ForeignKey(
+        Roles, on_delete=models.PROTECT, null=True, blank=True, related_name="users"
+    )
 
     def __str__(self):
         return f"{self.Name} {self.Surname} na stanowisku: {self.position}"
