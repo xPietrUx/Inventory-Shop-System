@@ -5,8 +5,11 @@ from django.db import models
 
 
 class Roles(models.Model):
-    role_name = models.CharField()
-    description = models.CharField()
+    role_name = models.CharField(max_length=255)
+    description = models.TextField()
+
+    def __str__(self):
+        return f"Rola {self.role_name} o opisie {self.description}"
 
 
 class Users(AbstractUser):
