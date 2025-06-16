@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/user/user-edit.css">
+    <link rel="stylesheet" href="style/user/user-add.css">
+    <title>Users Page</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#" class='selected'>Users</a></li>
+                <li><a href="">License</a></li>
+                <li><a href="">Equipment</a></li>
+            </ul>
+            <h1>Users</h1>
+            <ul>
+                <li><a href="">Sing in</a></li>
+                <li><a href="">Sing up</a></li>
+                <li><a href="">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <panel>
+            <div class='inner-panel'>
+                <h3>Table:</h3>
+                <ul>
+                    <li><a href="">Roles</a></li>
+                    <li><a href="" class='selected'>Users</a></li>
+                </ul>
+            </div>
+            <div class='inner-panel'>
+                <h3>Sort by:</h3>
+                <ul>
+                    <li><a href="">Administrators</a></li>
+                    <li><a href="" class='selected'>Users</a></li>
+                    <li><a href="">Guests</a></li>
+                </ul>
+            </div>
+        </panel>
+        <container>
+            <content-nav>
+                <a href='user-add.html' class='action-tab'>
+                    View
+                </a>
+                <a href='user-add.html' class='action-tab'>
+                    Add
+                </a>
+                <a class='action-tab blocked'>
+                    Delete
+                </a>
+                <a class='action-tab blocked selected'>
+                    Edit
+                </a>
+            </content-nav>
+            <content>
+                <div class="user-form-container">
+                    <form id="editUserForm" action="/edit-user" method="post">
+                        <div class="form-group">
+                            <label for="id_user">ID (readonly):</label>
+                            <input type="text" id="id_user" name="id_user" readonly value="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="surname">Surname:</label>
+                            <input type="text" id="surname" name="surname" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="position">Position:</label>
+                            <input type="text" id="position" name="position" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_role">ID roli:</label>
+                            <input type="number" id="id_role" name="id_role" required>
+                        </div>
+                        <button type="submit">Zapisz zmiany</button>
+                    </form>
+                </div>
+            </content>
+        </container>
+    </main>
+    <script>
+        $(document).ready(function () {
+            $('.user-summary').on('click', function () {
+                $(this).siblings('.user-details').slideToggle();
+                $(this).find('.expand-icon').toggleClass('expanded');
+            });
+        });
+    </script>
+</body>
+
+</html>

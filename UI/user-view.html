@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/user/user-view.css">
+    <title>Users Page</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#" class='selected'>Users</a></li>
+                <li><a href="">License</a></li>
+                <li><a href="">Equipment</a></li>
+            </ul>
+            <h1>Users</h1>
+            <ul>
+                <li><a href="">Sing in</a></li>
+                <li><a href="">Sing up</a></li>
+                <li><a href="">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <panel>
+            <div class='inner-panel'>
+                <h3>Table:</h3>
+                <ul>
+                    <li><a href="">Roles</a></li>
+                    <li><a href="" class='selected'>Users</a></li>
+                </ul>
+            </div>
+            <div class='inner-panel'>
+                <h3>Sort by:</h3>
+                <ul>
+                    <li><a href="">Administrators</a></li>
+                    <li><a href="" class='selected'>Users</a></li>
+                    <li><a href="">Guests</a></li>
+                </ul>
+            </div>
+        </panel>
+        <container>
+            <content-nav>
+                <a href='#' class='action-tab selected'>
+                    View
+                </a>
+                <a href='user-add.html' class='action-tab'>
+                    Add
+                </a>
+                <a class='action-tab blocked'>
+                    Delete
+                </a>
+                <a class='action-tab blocked'>
+                    Edit
+                </a>
+            </content-nav>
+            <content>
+                <div class="user-list-header">
+                    <span class="user-id-header">ID</span>
+                    <span class="user-name-header">Name</span>
+                    <span class="user-email-header">E-mail</span>
+                    <span class="user-role-header">Position</span>
+                    <span class="expand-icon-header"></span>
+                </div>
+                <div class="user-list">
+                    <div class="user-item">
+                        <div class="user-summary">
+                            <span class="user-id">1</span>
+                            <span class="user-name">John Doe</span>
+                            <span class="user-email">johndoe@example.com</span>
+                            <span class="user-role">Editor</span>
+                            <span class="expand-icon">&#9660;</span>
+                        </div>
+                        <div class="user-details">
+                            <h4>Role</h4>
+                            <p><strong>ID Role:</strong> 15</p>
+                            <p><strong>Role Name:</strong> Vibe Coder</p>
+                            <p><strong>Description:</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                Placeat maxime repudiandae consectetur voluptates, neque laudantium.</p>
+                            <h3>Actions</h3>
+                            <a href="user-edit.html" class="edit">Edit</a>
+                            <a href="user-delete.html" class="delete">Delete</a>
+                        </div>
+                    </div>
+                    <div class="user-item">
+                        <div class="user-summary">
+                            <span class="user-id">2</span>
+                            <span class="user-name">Jane Smith</span>
+                            <span class="user-email">janesmith@example.com</span>
+                            <span class="user-role">User</span>
+                            <span class="expand-icon">&#9660;</span>
+                        </div>
+                        <div class="user-details">
+                            <h4>Role</h4>
+                            <p><strong>ID Role:</strong> 23</p>
+                            <p><strong>Role Name:</strong> Editor</p>
+                            <p><strong>Description:</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                Placeat maxime repudiandae consectetur voluptates, neque laudantium.</p>
+                            <h3>Actions</h3>
+                            <a href="user-edit.html" class="edit">Edit</a>
+                            <a href="user-delete.html" class="delete">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </content>
+        </container>
+    </main>
+    <script>
+        $(document).ready(function () {
+            $('.user-summary').on('click', function () {
+                $(this).siblings('.user-details').slideToggle();
+                $(this).find('.expand-icon').toggleClass('expanded');
+            });
+        });
+    </script>
+</body>
+
+</html>
