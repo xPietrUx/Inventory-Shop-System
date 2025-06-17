@@ -5,12 +5,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description"
-          content="{% block meta_description %}System zarządzania inwentarzem i licencjami.{% endblock meta_description %}" />
+          content="{% block meta_description %}Inventory and license management system.{% endblock meta_description %}" />
     <meta name="keywords"
-          content="{% block meta_keywords %}inwentarz, licencje, oprogramowanie, sprzęt{% endblock meta_keywords %}" />
+          content="{% block meta_keywords %}inventory, licenses, software, hardware{% endblock meta_keywords %}" />
     <title>
       {% block title %}
-        {{ active_page_title|default:"Moja Aplikacja" }}
+        {{ active_page_title|default:"" }}
       {% endblock title %}
     </title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
@@ -26,7 +26,7 @@
           </li>
           <li>
             <a href="{% url 'licenses:license_list' %}"
-               class="{% if active_nav == 'licenses' %}selected{% endif %}">License</a>
+               class="{% if active_nav == 'licenses' or active_nav == 'software' %}selected{% endif %}">License</a>
           </li>
           <li>
             <a href="" class="{% if active_nav == 'hardware' %}selected{% endif %}">Hardware</a>
@@ -34,7 +34,7 @@
         </ul>
         <h1>
           {% block page_title %}
-            {{ active_page_title|default:"Strona Główna"
+            {{ active_page_title|default:"Home Page"
             }}
           {% endblock page_title %}
         </h1>
@@ -55,6 +55,9 @@
       {% block content %}
       {% endblock content %}
     </main>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
     {% block extra_js %}
     {% endblock extra_js %}
   </body>
