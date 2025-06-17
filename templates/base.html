@@ -4,77 +4,58 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+          content="{% block meta_description %}System zarządzania inwentarzem i licencjami.{% endblock meta_description %}" />
+    <meta name="keywords"
+          content="{% block meta_keywords %}inwentarz, licencje, oprogramowanie, sprzęt{% endblock meta_keywords %}" />
     <title>
-      {% block title %}{{ active_page_title|default:"Moja Aplikacja" }}{%
-      endblock %}
+      {% block title %}
+        {{ active_page_title|default:"Moja Aplikacja" }}
+      {% endblock title %}
     </title>
-    <link rel="stylesheet" href="{% static 'css/global_styles.css' %}" />
-    {% block extra_css %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    {% block extra_css %}
+    {% endblock extra_css %}
   </head>
   <body>
     <header>
       <nav>
         <ul>
           <li>
-            {% comment %} ❗❗Potrzebna aktualizacja url❗❗ {% endcomment %}
-            <a
-              href="{% url 'users_view_url_name' %}"
-              class="{% if active_nav == &quot;users&quot; %}selected{% endif %}"
-              >Users</a
-            >
+            <a href="" class="{% if active_nav == 'users' %}selected{% endif %}">Users</a>
           </li>
           <li>
-            <a
-              href="{% url 'licenses:software_list' %}"
-              class="{% if active_nav == &quot;software&quot; %}selected{% endif %}"
-              >Software</a
-            >
+            <a href="{% url 'licenses:license_list' %}"
+               class="{% if active_nav == 'licenses' %}selected{% endif %}">License</a>
           </li>
           <li>
-            <a
-              href="{% url 'licenses:license_list' %}"
-              class="{% if active_nav == &quot;licenses&quot; %}selected{% endif %}"
-              >License</a
-            >
-          </li>
-          <li>
-            <a
-              href="{% url 'equipment_view_url_name' %}"
-              class="{% if active_nav == &quot;equipment&quot; %}selected{% endif %}"
-              >Equipment</a
-            >
+            <a href="" class="{% if active_nav == 'hardware' %}selected{% endif %}">Hardware</a>
           </li>
         </ul>
         <h1>
-          {% block page_title %}{{ active_page_title|default:"Strona Główna"
-          }}{% endblock %}
+          {% block page_title %}
+            {{ active_page_title|default:"Strona Główna"
+            }}
+          {% endblock page_title %}
         </h1>
         <ul>
           <li>
-            <a
-              href="{% url 'sing_in_url_name' %}"
-              class="{% if active_nav == &quot;sing_in&quot; %}selected{% endif %}">
-              Sing in
-            </a>
+            <a href="" class="{% if active_nav == 'sing_in' %}selected{% endif %}">Sign in</a>
           </li>
           <li>
-            <a
-              href="{% url 'sing_up_url_name' %}"
-              class="{% if active_nav == &quot;sing_up&quot; %}selected{% endif %}">
-              Sing up
-            </a>
+            <a href="" class="{% if active_nav == 'sing_up' %}selected{% endif %}">Sign up</a>
           </li>
           <li>
-            <a
-              href="{% url 'about_url_name' %}"
-              class="{% if active_nav == &quot;about&quot; %}selected{% endif %}">
-              About
-            </a>
+            <a href="" class="{% if active_nav == 'about' %}selected{% endif %}">About</a>
           </li>
         </ul>
       </nav>
     </header>
-    <main>{% block content %}{% endblock %}</main>
-    {% block extra_js %}{% endblock %}
+    <main>
+      {% block content %}
+      {% endblock content %}
+    </main>
+    {% block extra_js %}
+    {% endblock extra_js %}
   </body>
 </html>
