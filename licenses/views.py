@@ -1,12 +1,46 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse  # Dodaj ten import dla placeholderów
+from django import forms
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Software, License
 
 
+class SoftwareForm(forms.ModelForm):
+    class Meta:
+        model = Software
+        fields = ["name", "producer"]
+        widgets = {
+            "name": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Software name"}
+            ),
+            "producer": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Producer"}
+            ),
+        }
+
+
+class LicenseForm(forms.ModelForm):
+    class Meta:
+        model = License
+        fields = [
+            "software_id",
+            "license_key",
+            "user_id",
+            "purchase_date",
+            "expiration_date",
+            "license_type",
+        ]
+        widgets = {
+            "purchase_date": forms.DateInput(attrs={"type": "date"}),
+            "expiration_date": forms.DateInput(attrs={"type": "date"}),
+        }
+
+
+# ===========================
 # Widoki dla modelu Software
+# ===========================
+
+
 def software_list_view(request):
     software_items = Software.objects.all()
-    # Możesz dodać logikę sortowania na podstawie request.GET.get('sort')
     active_nav = "software"
     active_page_title = "Oprogramowanie"
     return render(
@@ -21,17 +55,20 @@ def software_list_view(request):
 
 
 def software_add_view(request):
-    # Tutaj logika formularza dodawania
-    # from .forms import SoftwareForm # Przykładowy import formularza
-    # form = SoftwareForm()
     active_nav = "software"
     active_page_title = "Dodaj Oprogramowanie"
-    # Upewnij się, że szablon 'licenses/software/software_add.html' istnieje
+    if request.method == "POST":
+        form = SoftwareForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("licenses:software_list")
+    else:
+        form = SoftwareForm()
     return render(
         request,
-        "licenses/software/software_add.html",  # Upewnij się, że ten szablon istnieje
+        "licenses/software/software_add.html",
         {
-            # 'form': form,
+            "form": form,
             "active_nav": active_nav,
             "active_page_title": active_page_title,
         },
@@ -40,15 +77,22 @@ def software_add_view(request):
 
 def software_edit_view(request, pk):
     software_instance = get_object_or_404(Software, pk=pk)
-    # Tutaj logika formularza edycji
     active_nav = "software"
     active_page_title = f"Edytuj Oprogramowanie: {software_instance.name}"
-    # Upewnij się, że szablon 'licenses/software/software_edit.html' istnieje
+
+    if request.method == "POST":
+        form = SoftwareForm(request.POST, instance=software_instance)
+        if form.is_valid():
+            form.save()
+            return redirect("licenses:software_list")
+    else:
+        form = SoftwareForm(instance=software_instance)
+
     return render(
         request,
-        "licenses/software/software_edit.html",  # Upewnij się, że ten szablon istnieje
+        "licenses/software/software_edit.html",
         {
-            # 'form': form_instance,
+            "form": form,
             "software": software_instance,
             "active_nav": active_nav,
             "active_page_title": active_page_title,
@@ -58,13 +102,16 @@ def software_edit_view(request, pk):
 
 def software_delete_view(request, pk):
     software_instance = get_object_or_404(Software, pk=pk)
-    # Tutaj logika potwierdzenia usunięcia i usuwania
     active_nav = "software"
     active_page_title = f"Usuń Oprogramowanie: {software_instance.name}"
-    # Upewnij się, że szablon 'licenses/software/software_delete.html' istnieje
+
+    if request.method == "POST":
+        software_instance.delete()
+        return redirect("licenses:software_list")
+
     return render(
         request,
-        "licenses/software/software_delete.html",  # Upewnij się, że ten szablon istnieje
+        "licenses/software/software_delete.html",
         {
             "software": software_instance,
             "active_nav": active_nav,
@@ -73,15 +120,18 @@ def software_delete_view(request, pk):
     )
 
 
+# ===========================
 # Widoki dla modelu License
+# ===========================
+
+
 def license_list_view(request):
     license_items = License.objects.all()
     active_nav = "licenses"
     active_page_title = "Licencje"
-    # Upewnij się, że szablon 'licenses/license/license_list.html' istnieje
     return render(
         request,
-        "licenses/license/license_list.html",  # Upewnij się, że ten szablon istnieje
+        "licenses/license/license_list.html",
         {
             "license_list": license_items,
             "active_nav": active_nav,
@@ -93,12 +143,21 @@ def license_list_view(request):
 def license_add_view(request):
     active_nav = "licenses"
     active_page_title = "Dodaj Licencję"
-    # Upewnij się, że szablon 'licenses/license/license_add.html' istnieje
-    # Ten szablon ma już jakąś zawartość, więc renderujemy go
+    if request.method == "POST":
+        form = LicenseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("licenses:license_list")
+    else:
+        form = LicenseForm()
     return render(
         request,
         "licenses/license/license_add.html",
-        {"active_nav": active_nav, "active_page_title": active_page_title},
+        {
+            "form": form,
+            "active_nav": active_nav,
+            "active_page_title": active_page_title,
+        },
     )
 
 
@@ -106,12 +165,21 @@ def license_edit_view(request, pk):
     license_instance = get_object_or_404(License, pk=pk)
     active_nav = "licenses"
     active_page_title = f"Edytuj Licencję: {license_instance.license_key}"
-    # Upewnij się, że szablon 'licenses/license/license_edit.html' istnieje
+
+    if request.method == "POST":
+        form = LicenseForm(request.POST, instance=license_instance)
+        if form.is_valid():
+            form.save()
+            return redirect("licenses:license_list")
+    else:
+        form = LicenseForm(instance=license_instance)
+
     return render(
         request,
-        "licenses/license/license_edit.html",  # Upewnij się, że ten szablon istnieje
+        "licenses/license/license_edit.html",
         {
-            "license_item": license_instance,  # Zmieniono nazwę zmiennej kontekstowej
+            "form": form,
+            "license_item": license_instance,
             "active_nav": active_nav,
             "active_page_title": active_page_title,
         },
@@ -122,12 +190,16 @@ def license_delete_view(request, pk):
     license_instance = get_object_or_404(License, pk=pk)
     active_nav = "licenses"
     active_page_title = f"Usuń Licencję: {license_instance.license_key}"
-    # Upewnij się, że szablon 'licenses/license/license_delete.html' istnieje
+
+    if request.method == "POST":
+        license_instance.delete()
+        return redirect("licenses:license_list")
+
     return render(
         request,
-        "licenses/license/license_delete.html",  # Upewnij się, że ten szablon istnieje
+        "licenses/license/license_delete.html",
         {
-            "license_item": license_instance,  # Zmieniono nazwę zmiennej kontekstowej
+            "license_item": license_instance,
             "active_nav": active_nav,
             "active_page_title": active_page_title,
         },
