@@ -5,8 +5,11 @@ User = get_user_model()
 
 
 class Software(models.Model):
-    name = models.CharField(max_length=30)
-    producer = models.CharField(max_length=30)
+    name = models.CharField(max_length=100)
+    producer = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.name} ({self.producer})"
 
 
 class License(models.Model):
