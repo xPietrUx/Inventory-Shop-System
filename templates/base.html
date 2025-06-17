@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}{{ active_page_title|default:"Moja Aplikacja" }}{%
+      endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static 'css/global_styles.css' %}" />
+    {% block extra_css %}{% endblock %}
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li>
+            {% comment %} ❗❗Potrzebna aktualizacja url❗❗ {% endcomment %}
+            <a
+              href="{% url 'users_view_url_name' %}"
+              class="{% if active_nav == &quot;users&quot; %}selected{% endif %}"
+              >Users</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'software_view_url_name' %}"
+              class="{% if active_nav == &quot;software&quot; %}selected{% endif %}"
+              >Software</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'license_view_url_name' %}"
+              class="{% if active_nav == &quot;licenses&quot; %}selected{% endif %}"
+              >License</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'equipment_view_url_name' %}"
+              class="{% if active_nav == &quot;equipment&quot; %}selected{% endif %}"
+              >Equipment</a
+            >
+          </li>
+        </ul>
+        <h1>
+          {% block page_title %}{{ active_page_title|default:"Strona Główna"
+          }}{% endblock %}
+        </h1>
+        <ul>
+          <li>
+            <a
+              href="{% url 'sing_in_url_name' %}"
+              class="{% if active_nav == &quot;sing_in&quot; %}selected{% endif %}">
+              Sing in
+            </a>
+          </li>
+          <li>
+            <a
+              href="{% url 'sing_up_url_name' %}"
+              class="{% if active_nav == &quot;sing_up&quot; %}selected{% endif %}">
+              Sing up
+            </a>
+          </li>
+          <li>
+            <a
+              href="{% url 'about_url_name' %}"
+              class="{% if active_nav == &quot;about&quot; %}selected{% endif %}">
+              About
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>{% block content %}{% endblock %}</main>
+    {% block extra_js %}{% endblock %}
+  </body>
+</html>
