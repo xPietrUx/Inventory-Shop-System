@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  Software
+  List {{ block.super }}
+{% endblock title %}
+{% block extra_css %}
+  <link rel="stylesheet"
+        href="{% static 'licenses/css/software/software-list.css' %}" />
+{% endblock extra_css %}
+{% block page_title %}
+  Software List
+{% endblock page_title %}
+{% block content %}
+  <panel>
+  <div class="inner-panel">
+    <h3>License Tables:</h3>
+    <ul>
+      <li>
+        <a href="{% url 'licenses:software_list' %}" class="selected">Software</a>
+      </li>
+      <li>
+        <a href="{% url 'licenses:license_list' %}">Licenses</a>
+      </li>
+    </ul>
+  </div>
+  </panel>
+  <container>
+  <content-nav>
+    <a href='{% url "licenses:software_list" %}' class="action-tab selected">View Software</a>
+    <a href='{% url "licenses:software_add" %}' class="action-tab">Add Software</a>
+  </content-nav>
+  <content>
+    <div class="user-list-header">
+      <span class="user-id-header">Software ID</span>
+      <span class="user-name-header">Name</span>
+      <span class="user-email-header">Producer</span>
+      <span class="expand-icon-header"></span>
+    </div>
+    <div class="user-list">
+      {% for sw in software_list %}
+        <div class="user-item">
+          <div class="user-summary">
+            <span class="user-id">{{ sw.id }}</span>
+            <span class="user-name">{{ sw.name }}</span>
+            <span class="user-email">{{ sw.producer }}</span>
+            <span class="expand-icon">▼</span> {# Znak Unicode zamiast encji #}
+          </div>
+          <div class="user-details">
+            <h4>Details for {{ sw.name }}</h4>
+            <p>
+              <strong>Producer:</strong> {{ sw.producer }}
+            </p>
+            <p>
+              <strong>Internal ID:</strong> {{ sw.id }}
+            </p>
+            <h3>Actions</h3>
+            <a href="{% url 'licenses:software_edit' pk=sw.pk %}" class="edit">Edit</a>
+            <a href="{% url 'licenses:software_delete' pk=sw.pk %}" class="delete">Delete</a>
+          </div>
+        </div>
+      {% empty %}
+        <div class="user-item">
+          <div class="user-summary">
+            <span class="empty-list-message empty-list-message-centered">No software to display.</span> {# Dodano nową klasę #}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </content>
+  </container>
+{% endblock content %}
+{% block extra_js %}
+  <script>
+  $(document).ready(function () {
+      $('.user-summary').on('click', function (event) {
+          // Prevent expanding if an action link was clicked inside details (if any were there)
+          // This check is more relevant if action links are directly in user-summary
+          if ($(event.target).closest('a').length && $(event.target).closest('.user-summary').length) {
+              return;
+          }
+          $(this).siblings('.user-details').slideToggle();
+          $(this).find('.expand-icon').toggleClass('expanded');
+      });
+  });
+  </script>
+{% endblock extra_js %}
