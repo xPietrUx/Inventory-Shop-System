@@ -4,16 +4,16 @@ from django.db import migrations
 from django.conf import settings
 from django.contrib.auth.hashers import make_password
 from datetime import date, timedelta
-import django.db.models
+import django.db.models  # Upewnij się, że ten import jest obecny, jeśli używasz Q
 
 
 def seed_data(apps, schema_editor):
+    print("--- Rozpoczynam seed_data ---")
     User = apps.get_model("users", "Users")
     Software = apps.get_model("licenses", "Software")
     License = apps.get_model("licenses", "License")
 
     # --- Create Users ---
-    # (Ensure these usernames don't conflict if you have existing users)
     users_data = [
         {
             "username": "jdoe_seed",
@@ -38,6 +38,7 @@ def seed_data(apps, schema_editor):
         },
     ]
     created_users = []
+    print("Tworzenie użytkowników...")
     for user_data in users_data:
         user, created = User.objects.get_or_create(
             username=user_data["username"],
@@ -51,10 +52,31 @@ def seed_data(apps, schema_editor):
                 "is_superuser": False,
             },
         )
+        if created:
+            print(f"  Utworzono użytkownika: {user.username}")
+        else:
+            print(f"  Użytkownik już istnieje: {user.username}")
         created_users.append(user)
 
-    if not created_users:  # Fallback if users already existed
-        created_users = [User.objects.get(username=ud["username"]) for ud in users_data]
+    if (
+        not created_users and users_data
+    ):  # Fallback if users already existed and created_users is empty
+        print("  Próba pobrania istniejących użytkowników (fallback)...")
+        try:
+            created_users = [
+                User.objects.get(username=ud["username"]) for ud in users_data
+            ]
+        except User.DoesNotExist as e:
+            print(f"  Błąd podczas pobierania użytkownika (fallback): {e}")
+            print(
+                "!!! BŁĄD KRYTYCZNY: Nie można pobrać użytkowników. Przerywam seed_data."
+            )
+            print("--- Zakończono seed_data (z błędami krytycznymi) ---")
+            return
+
+    print(
+        f"Zakończono tworzenie/pobieranie użytkowników. Liczba użytkowników do użycia: {len(created_users)}"
+    )
 
     # --- Create Software ---
     software_data = [
@@ -66,13 +88,42 @@ def seed_data(apps, schema_editor):
         {"name": "DataCruncher Enterprise", "producer": "InfoAnalytics Co."},
     ]
     created_software = []
+    print("Tworzenie oprogramowania...")
     for sw_data in software_data:
         software_item, created = Software.objects.get_or_create(
             name=sw_data["name"], defaults={"producer": sw_data["producer"]}
         )
+        if created:
+            print(f"  Utworzono oprogramowanie: {software_item.name}")
+        else:
+            print(f"  Oprogramowanie już istnieje: {software_item.name}")
         created_software.append(software_item)
+    print(
+        f"Zakończono tworzenie oprogramowania. Liczba pozycji: {len(created_software)}"
+    )
 
     # --- Create Licenses ---
+    if not created_users or not created_software:
+        print(
+            "!!! BŁĄD: Nie można utworzyć licencji - brak załadowanych użytkowników lub oprogramowania."
+        )
+        if not created_users:
+            print("  Lista 'created_users' jest pusta.")
+        if not created_software:
+            print("  Lista 'created_software' jest pusta.")
+        print("--- Zakończono seed_data (z problemami) ---")
+        return
+
+    # Sprawdzenie czy indeksy nie wyjdą poza zakres
+    if len(created_software) < 6 or len(created_users) < 3:
+        print(
+            "!!! BŁĄD: Niewystarczająca liczba utworzonych programów lub użytkowników do utworzenia wszystkich licencji."
+        )
+        print(f"  Liczba programów: {len(created_software)}, potrzebne co najmniej 6")
+        print(f"  Liczba użytkowników: {len(created_users)}, potrzebne co najmniej 3")
+        print("--- Zakończono seed_data (z problemami) ---")
+        return
+
     licenses_to_create = [
         # Licenses for PhotoEditor Pro X
         {
@@ -177,9 +228,9 @@ def seed_data(apps, schema_editor):
             "type": "Perpetual",
         },
     ]
-
+    print("Tworzenie licencji...")
     for lic_data in licenses_to_create:
-        License.objects.get_or_create(
+        license_item, created = License.objects.get_or_create(
             license_key=lic_data["key"],
             defaults={
                 "software_id": lic_data["sw"],
@@ -189,14 +240,20 @@ def seed_data(apps, schema_editor):
                 "license_type": lic_data["type"],
             },
         )
+        if created:
+            print(f"  Utworzono licencję: {license_item.license_key}")
+        else:
+            print(f"  Licencja już istnieje: {license_item.license_key}")
+    print("Zakończono tworzenie licencji.")
+    print("--- Zakończono seed_data pomyślnie ---")
 
 
 def remove_data(apps, schema_editor):
+    print("--- Rozpoczynam remove_data ---")
     User = apps.get_model("users", "Users")
     Software = apps.get_model("licenses", "Software")
     License = apps.get_model("licenses", "License")
 
-    # Delete licenses associated with the specific software or users first
     software_names_to_delete = [
         "PhotoEditor Pro X",
         "DevSuite Ultimate 2024",
@@ -207,13 +264,22 @@ def remove_data(apps, schema_editor):
     ]
     user_names_to_delete = ["jdoe_seed", "asmith_seed", "bwayne_seed"]
 
-    License.objects.filter(
+    licenses_deleted_count, _ = License.objects.filter(
         django.db.models.Q(software_id__name__in=software_names_to_delete)
         | django.db.models.Q(user_id__username__in=user_names_to_delete)
     ).delete()
+    print(f"  Usunięto licencji: {licenses_deleted_count}")
 
-    Software.objects.filter(name__in=software_names_to_delete).delete()
-    User.objects.filter(username__in=user_names_to_delete).delete()
+    software_deleted_count, _ = Software.objects.filter(
+        name__in=software_names_to_delete
+    ).delete()
+    print(f"  Usunięto oprogramowania: {software_deleted_count}")
+
+    users_deleted_count, _ = User.objects.filter(
+        username__in=user_names_to_delete
+    ).delete()
+    print(f"  Usunięto użytkowników: {users_deleted_count}")
+    print("--- Zakończono remove_data ---")
 
 
 class Migration(migrations.Migration):
@@ -222,12 +288,11 @@ class Migration(migrations.Migration):
         (
             "licenses",
             "0002_initial",
-        ),  # Zastąp '0002_initial' nazwą ostatniej migracji w aplikacji 'licenses'
+        ),
         (
             "users",
             "0001_initial",
-        ),  # Zastąp '0001_initial' nazwą ostatniej migracji w aplikacji 'users'
-        # lub migracji tworzącej model User, jeśli jest w innej aplikacji
+        ),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
