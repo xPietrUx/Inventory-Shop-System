@@ -100,3 +100,23 @@ def users_edit_view(request, pk):
             "active_page_title": active_page_title,
         },
     )
+
+
+def users_delete_view(request, pk):
+    user = get_object_or_404(Users, pk=pk)
+    active_nav = "users"
+    active_page_title = f"Delete User: {user.username}"
+
+    if request.method == "POST":
+        user.delete()
+        return redirect("users:users_list")
+
+    return render(
+        request,
+        "users/users_delete.html",
+        {
+            "user": user,
+            "active_nav": active_nav,
+            "active_page_title": active_page_title,
+        },
+    )
