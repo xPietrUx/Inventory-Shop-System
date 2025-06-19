@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}
-    Edit License
+    Edit User
 {% endblock title %}
 {% block extra_css %}
     <link rel="stylesheet" href="{% static '/css/users/users-edit.css' %}" />
 {% endblock extra_css %}
 {% block page_title %}
-    Edit License
+    Edit User
 {% endblock page_title %}
 {% block content %}
     <panel>
     <div class="inner-panel">
-        <h3>License Tables:</h3>
+        <h3>User Tables:</h3>
         <ul>
             <li>
                 <a href="{% url 'users:users_list' %}" class="selected">Users</a>
