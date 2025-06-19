@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Edit Hardware
+{% endblock title %}
+{% block extra_css %}
+    <link rel="stylesheet"
+          href="{% static 'hardware/css/hardware/hardware-edit.css' %}" />
+{% endblock extra_css %}
+{% block page_title %}
+    Edit Hardware
+{% endblock page_title %}
+{% block content %}
+    <panel>
+    <div class="inner-panel">
+        <h3>Hardware Tables:</h3>
+        <ul>
+            <li>
+                <a href="{% url 'hardware:hardware_list' %}" class="selected">Hardware</a>
+            </li>
+        </ul>
+    </div>
+    </panel>
+    <container>
+    <content-nav>
+        <a href="{% url 'hardware:hardware_list' %}" class="action-tab">View Hardware</a>
+        <a href="{% url 'hardware:hardware_add' %}" class="action-tab">Add Hardware</a>
+        <a class="action-tab selected">Edit Hardware</a>
+    </content-nav>
+    <content>
+        <div class="user-form-container">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_inventory_number">Inventory Number:</label>
+                    {{ form.inventory_number }}
+                    {% if form.inventory_number.errors %}<div class="form-error">{{ form.inventory_number.errors }}</div>{% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="id_name">Name:</label>
+                    {{ form.name }}
+                    {% if form.name.errors %}<div class="form-error">{{ form.name.errors }}</div>{% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="id_category_id">Category:</label>
+                    {{ form.category_id }}
+                    {% if form.category_id.errors %}<div class="form-error">{{ form.category_id.errors }}</div>{% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="id_serial_number">Serial Number:</label>
+                    {{ form.serial_number }}
+                    {% if form.serial_number.errors %}<div class="form-error">{{ form.serial_number.errors }}</div>{% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="id_purchase_date">Purchase Date:</label>
+                    {{ form.purchase_date }}
+                    {% if form.purchase_date.errors %}<div class="form-error">{{ form.purchase_date.errors }}</div>{% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="id_warranty_to">Warranty To:</label>
+                    {{ form.warranty_to }}
+                    {% if form.warranty_to.errors %}<div class="form-error">{{ form.warranty_to.errors }}</div>{% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="id_status">Status:</label>
+                    {{ form.status }}
+                    {% if form.status.errors %}<div class="form-error">{{ form.status.errors }}</div>{% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="id_user_id">User:</label>
+                    {{ form.user_id }}
+                    {% if form.user_id.errors %}<div class="form-error">{{ form.user_id.errors }}</div>{% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="id_project_id">Project:</label>
+                    {{ form.project_id }}
+                    {% if form.project_id.errors %}<div class="form-error">{{ form.project_id.errors }}</div>{% endif %}
+                </div>
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+    </content>
+    </container>
+{% endblock content %}

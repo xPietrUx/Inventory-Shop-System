@@ -34,12 +34,21 @@ class Hardware(models.Model):
         choices=HardwareStatus,
         default=HardwareStatus.IN_STORAGE,
     )
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    project_id = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    project_id = models.ForeignKey(Project, on_delete=models.CASCADE, null=True, blank=True)
 
 
 class HardwareHistory(models.Model):
+    class EventType(models.TextChoices):
+        ASSIGNED = "ASSIGNED", "Assigned to user"
+        RETURNED = "RETURNED", "Returned to storage"
+        REPAIR = "REPAIR", "Sent for repair"
+        UTILIZED = "UTILIZED", "Utilized"
+        CREATED = "CREATED", "Created"
+
     hardware_id = models.ForeignKey(Hardware, on_delete=models.CASCADE)
     event_date = models.DateField()
-    event_type = models.DateField()
+    event_type = models.CharField(
+        max_length=10, choices=EventType.choices, default=EventType.CREATED
+    )
     description = models.TextField()

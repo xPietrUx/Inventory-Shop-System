@@ -1,0 +1,64 @@
+@import url('../../main.css');
+@import url('../../style.css');
+
+.project-list-header {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--secondary-color);
+  color: var(--body-bg);
+  font-weight: var(--font-weight-bold);
+  border-bottom: 2px solid var(--primary-color);
+  margin-bottom: var(--spacing-xs);
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+}
+
+.project-list-header span {
+  flex-basis: 22%;
+  padding-right: var(--spacing-sm);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.project-list-header .project-id-header {
+  flex-basis: 8%;
+}
+
+.project-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.project-item {
+  border: var(--border-width) solid var(--primary-color);
+  border-radius: var(--border-radius);
+  background-color: var(--body-bg);
+}
+
+.project-summary {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  justify-content: flex-end;
+}
+
+.project-summary:hover {
+  background-color: #f0f0f0;
+}
+
+.project-summary span {
+  flex-basis: 22%;
+  padding-right: var(--spacing-sm);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.project-summary .project-id {
+  flex-basis: 8%;
+}

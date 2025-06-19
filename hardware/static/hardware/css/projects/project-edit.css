@@ -1,0 +1,92 @@
+@import url('../../main.css');
+@import url('../../style.css');
+
+.project-form-container {
+  max-width: 500px;
+  margin: var(--spacing-lg) auto;
+  padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-md)
+    var(--spacing-lg);
+  background: var(--body-bg);
+  border-radius: var(--border-radius);
+  border: var(--border-width) solid var(--primary-color);
+  box-shadow: none;
+}
+
+.project-form-container h2 {
+  margin-bottom: var(--spacing-lg);
+  font-size: 1.2em;
+  font-weight: var(--font-weight-bold);
+  color: var(--text-color);
+  text-align: left;
+}
+
+.project-form-container .form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.project-form-container label {
+  display: block;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-xs);
+  color: var(--text-color);
+}
+
+.project-form-container input[type='text'],
+.project-form-container input[type='date'],
+.project-form-container textarea {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: var(--border-width) solid var(--primary-color);
+  border-radius: var(--border-radius);
+  background: var(--body-bg);
+  color: var(--text-color);
+  font-size: 1em;
+  box-sizing: border-box;
+}
+
+.project-form-container .form-error {
+  color: var(--error-color);
+  font-size: 0.95em;
+  margin-top: 0.3em;
+}
+
+.project-form-container .form-actions,
+.project-form-container button,
+.project-form-container a.cancel {
+  width: 100%;
+}
+
+.project-form-container button {
+  background: var(--secondary-color);
+  color: var(--body-bg);
+  font-size: 1.1em;
+  font-weight: var(--font-weight-bold);
+  border: none;
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md) 0;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-bottom: var(--spacing-xs);
+  text-align: center;
+}
+
+.project-form-container button:hover {
+  background: var(--tertiary-color);
+}
+
+.project-form-container a.cancel {
+  background: #e9eaea;
+  color: var(--text-color);
+  font-size: 1.1em;
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md) 0;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  transition: background 0.2s;
+}
+
+.project-form-container a.cancel:hover {
+  background: #d1d2d2;
+}

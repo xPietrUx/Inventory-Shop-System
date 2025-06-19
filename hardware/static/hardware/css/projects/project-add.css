@@ -1,0 +1,50 @@
+@import url('../../main.css');
+@import url('../../style.css');
+
+.project-form-container {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: var(--spacing-md);
+  border: var(--border-width) solid var(--primary-color);
+  border-radius: var(--border-radius);
+  background-color: #f9f9f9;
+}
+
+.project-form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.project-form-container .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-form-container label {
+  margin-bottom: 0.5rem;
+  font-weight: var(--font-weight-bold);
+}
+
+.project-form-container input[type='text'],
+.project-form-container input[type='date'],
+.project-form-container textarea {
+  padding: 0.5rem;
+  border: var(--border-width) solid var(--primary-color);
+  border-radius: var(--border-radius);
+}
+
+.project-form-container button {
+  padding: 0.75rem;
+  border-radius: var(--border-radius);
+  background-color: var(--secondary-color);
+  color: var(--body-bg);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.project-form-container button:hover {
+  background-color: var(--tertiary-color);
+}

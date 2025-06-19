@@ -1,0 +1,65 @@
+@import url('../../main.css');
+@import url('../../style.css');
+
+.user-form-container {
+  max-width: 500px;
+  margin: var(--spacing-lg) auto;
+  padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-md)
+    var(--spacing-lg);
+  background: var(--body-bg);
+  border-radius: var(--border-radius);
+  border: var(--border-width) solid var(--primary-color);
+  box-shadow: none;
+}
+
+.user-form-container h2 {
+    margin-bottom: 1rem;
+}
+
+.user-form-container p {
+    margin-bottom: 0.5rem;
+}
+
+.form-actions {
+  margin-top: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+button.delete {
+  width: 100%;
+  text-align: center;
+  background: var(--error-color);
+  color: var(--body-bg);
+  font-size: 1.1em;
+  font-weight: var(--font-weight-bold);
+  border: none;
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md) 0;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-bottom: var(--spacing-xs);
+}
+
+button.delete:hover {
+  background: #b62c3a;
+}
+
+a.cancel {
+  width: 100%;
+  background: #e9eaea;
+  color: var(--text-color);
+  font-size: 1.1em;
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md) 0;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  transition: background 0.2s;
+}
+
+a.cancel:hover {
+  background: #d1d2d2;
+}

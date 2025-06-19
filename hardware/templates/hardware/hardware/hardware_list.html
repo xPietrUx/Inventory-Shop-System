@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Hardware List
+{% endblock title %}
+{% block extra_css %}
+    <link rel="stylesheet"
+          href="{% static 'hardware/css/hardware/hardware-list.css' %}" />
+{% endblock extra_css %}
+{% block page_title %}
+    Hardware List
+{% endblock page_title %}
+{% block content %}
+    <panel>
+    <div class="inner-panel">
+        <h3>Hardware Tables:</h3>
+        <ul>
+            <li>
+                <a href="{% url 'hardware:hardware_list' %}" class="selected">Hardware</a>
+            </li>
+        </ul>
+    </div>
+    </panel>
+    <container>
+    <content-nav>
+        <a href="{% url 'hardware:hardware_list' %}" class="action-tab selected">View Hardware</a>
+        <a href="{% url 'hardware:hardware_add' %}" class="action-tab">Add Hardware</a>
+    </content-nav>
+    <content>
+        <div class="user-list-header">
+            <span class="user-id-header">Inv. Number</span>
+            <span class="user-name-header">Name</span>
+            <span class="user-email-header">Category</span>
+            <span class="user-role-header">Status</span>
+            <span class="expand-icon-header"></span>
+        </div>
+        <div class="user-list">
+            {% for hw in hardware_list %}
+                <div class="user-item">
+                    <div class="user-summary">
+                        <span class="user-id">{{ hw.inventory_number }}</span>
+                        <span class="user-name">{{ hw.name }}</span>
+                        <span class="user-email">{{ hw.category_id.name }}</span>
+                        <span class="user-role">{{ hw.get_status_display }}</span>
+                        <span class="expand-icon">▼</span>
+                    </div>
+                    <div class="user-details">
+                        <p>
+                            <strong>Inventory Number:</strong> {{ hw.inventory_number }}
+                        </p>
+                        <p>
+                            <strong>Name:</strong> {{ hw.name }}
+                        </p>
+                        <p>
+                            <strong>Category:</strong> {{ hw.category_id.name }}
+                        </p>
+                        <p>
+                            <strong>Serial Number:</strong> {{ hw.serial_number }}
+                        </p>
+                        <p>
+                            <strong>Purchase Date:</strong> {{ hw.purchase_date }}
+                        </p>
+                        <p>
+                            <strong>Warranty Ends:</strong> {{ hw.warranty_to|default:"—" }}
+                        </p>
+                        <p>
+                            <strong>Status:</strong> {{ hw.get_status_display }}
+                        </p>
+                        <p>
+                            <strong>User:</strong> {{ hw.user_id.name }} {{ hw.user_id.surname }} ({{ hw.user_id.username }})
+                        </p>
+                        <p>
+                            <strong>Project:</strong> {{ hw.project_id.name|default:"—" }}
+                        </p>
+                        <h3>Actions</h3>
+                        <a href="{% url 'hardware:hardware_edit' pk=hw.pk %}" class="edit">Edit</a>
+                        <a href="{% url 'hardware:hardware_delete' pk=hw.pk %}" class="delete">Delete</a>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="user-item">
+                    <div class="user-summary">
+                        <span class="empty-list-message empty-list-message-centered">No hardware to display.</span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </content>
+    </container>
+{% endblock content %}
+{% block extra_js %}
+    <script>
+    $(document).ready(function () {
+      $('.user-summary').on('click', function (event) {
+        if ($(event.target).closest('a').length && $(event.target).closest('.user-summary').length) {
+          return;
+        }
+        $(this).siblings('.user-details').slideToggle();
+        $(this).find('.expand-icon').toggleClass('expanded');
+      });
+    });
+    </script>
+{% endblock extra_js %}

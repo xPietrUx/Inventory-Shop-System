@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Hardware History
+{% endblock title %}
+{% block extra_css %}
+    <link rel="stylesheet"
+          href="{% static 'hardware/css/history/hardware-history-list.css' %}" />
+{% endblock extra_css %}
+{% block page_title %}
+    Hardware History for {{ hardware.name }}
+{% endblock page_title %}
+{% block content %}
+    <panel>
+    <div class="inner-panel">
+        <h3>Hardware Tables:</h3>
+        <ul>
+            <li>
+                <a href="{% url 'hardware:hardware_list' %}" class="selected">Hardware</a>
+            </li>
+        </ul>
+    </div>
+    </panel>
+    <container>
+    <content-nav>
+        <a href="{% url 'hardware:hardware_list' %}" class="action-tab">View Hardware</a>
+        <a href="{% url 'hardware:hardware_add' %}" class="action-tab">Add Hardware</a>
+        <a class="action-tab selected">Hardware History</a>
+    </content-nav>
+    <content>
+        <div class="history-container">
+            <div class="history-list">
+                <h3>History</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Event Date</th>
+                            <th>Event Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for entry in history_list %}
+                            <tr>
+                                <td>{{ entry.event_date }}</td>
+                                <td>{{ entry.event_type }}</td>
+                                <td>{{ entry.description }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="3">No history entries found.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="history-form">
+                <h3>Add History Entry</h3>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Add Entry</button>
+                </form>
+            </div>
+        </div>
+    </content>
+    </container>
+{% endblock content %}
