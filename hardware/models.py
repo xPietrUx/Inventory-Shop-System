@@ -7,6 +7,9 @@ User = get_user_model()
 class HardwareCategory(models.Model):
     name = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.name
+
 
 class Project(models.Model):
     name = models.CharField(max_length=50)
@@ -14,6 +17,9 @@ class Project(models.Model):
     supervisor_id = models.ForeignKey(User, on_delete=models.CASCADE)
     start_date = models.DateField()
     end_date = models.DateField(null=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Hardware(models.Model):
@@ -38,6 +44,9 @@ class Hardware(models.Model):
     project_id = models.ForeignKey(
         Project, on_delete=models.CASCADE, null=True, blank=True
     )
+
+    def __str__(self):
+        return f"{self.name} ({self.inventory_number})"
 
 
 class HardwareHistory(models.Model):
