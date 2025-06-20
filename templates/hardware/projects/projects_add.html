@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Add Project
+{% endblock title %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/add_edit.css' %}" />
+{% endblock extra_css %}
+{% block page_title %}
+    Add Project
+{% endblock page_title %}
+{% block content %}
+    <panel>
+    <div class="inner-panel">
+        <h3>Hardware Tables:</h3>
+        <ul>
+            <li>
+                <a href="{% url 'hardware:hardware_list' %}">Hardware</a>
+            </li>
+            <li>
+                <a href="{% url 'hardware:history_list' %}">History</a>
+            </li>
+            <li>
+                <a href="{% url 'hardware:project_list' %}" class="selected">Projects</a>
+            </li>
+        </ul>
+    </div>
+    </panel>
+    <container>
+    <content-nav>
+        <a href="{% url 'hardware:project_list' %}" class="action-tab">View Projects</a>
+        <a href="{% url 'hardware:project_add' %}" class="action-tab selected">Add Project</a>
+    </content-nav>
+    <content>
+        <div class="user-form-container">
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.errors %}<div class="form-error">{{ field.errors|striptags }}</div>{% endif %}
+                    </div>
+                {% endfor %}
+                <button type="submit">Add Project</button>
+            </form>
+        </div>
+    </content>
+    </container>
+{% endblock content %}

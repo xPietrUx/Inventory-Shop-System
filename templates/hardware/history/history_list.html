@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Hardware History
+{% endblock title %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/list.css' %}" />
+{% endblock extra_css %}
+{% block page_title %}
+    Hardware History
+{% endblock page_title %}
+{% block content %}
+    <panel>
+    <div class="inner-panel">
+        <h3>Hardware Tables:</h3>
+        <ul>
+            <li>
+                <a href="{% url 'hardware:hardware_list' %}">Hardware</a>
+            </li>
+            <li>
+                <a href="{% url 'hardware:history_list' %}" class="selected">History</a>
+            </li>
+            <li>
+                <a href="{% url 'hardware:project_list' %}">Projects</a>
+            </li>
+        </ul>
+    </div>
+    </panel>
+    <container>
+    <content-nav>
+        <a href="{% url 'hardware:history_list' %}" class="action-tab selected">View History</a>
+    </content-nav>
+    <content>
+        <div class="user-list-header">
+            <span>Date</span>
+            <span>Hardware</span>
+            <span>Event Type</span>
+            <span>Description</span>
+        </div>
+        <div class="user-list">
+            {% for item in history_list %}
+                <div class="user-item">
+                    <div class="user-summary">
+                        <span>{{ item.event_date }}</span>
+                        <span>{{ item.hardware_id.name }} ({{ item.hardware_id.inventory_number }})</span>
+                        <span>{{ item.get_event_type_display }}</span>
+                        <span>{{ item.description }}</span>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="user-item">
+                    <div class="user-summary">
+                        <span class="empty-list-message empty-list-message-centered">No history to display.</span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </content>
+    </container>
+{% endblock content %}
+{% block extra_js %}
+    <script>
+$(document).ready(function () {
+  $('.user-summary').on('click', function (event) {
+    if ($(event.target).closest('a').length) {
+      return;
+    }
+    $(this).siblings('.user-details').slideToggle();
+    $(this).find('.expand-icon').toggleClass('expanded');
+  });
+});
+    </script>
+{% endblock extra_js %}
