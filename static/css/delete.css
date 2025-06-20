@@ -1,6 +1,6 @@
-@import url("/main.css");
-@import url("/style.css");
-@import url("add_edit.css");
+@import url('/main.css');
+@import url('/style.css');
+@import url('add_edit.css');
 
 /* 
     ==========================================================================
@@ -10,6 +10,7 @@
 
 .user-form-container .form-actions {
 	display: flex;
+	flex-direction: column;
 	gap: 1rem;
 	margin-top: 1.5rem;
 }
@@ -30,6 +31,7 @@
 }
 
 .user-form-container a.cancel {
+	text-align: center;
 	background: var(--secondary-color);
 	color: var(--body-bg);
 	padding: 0.75rem 2rem;
