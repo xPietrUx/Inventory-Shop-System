@@ -18,7 +18,7 @@ class Users(AbstractUser):
     email = models.EmailField(unique=True)
     position = models.CharField(max_length=255)
     id_role = models.ForeignKey(
-        Roles, on_delete=models.PROTECT, null=True, blank=True, related_name="users"
+        Roles, on_delete=models.SET_NULL, null=True, blank=True, related_name="users"
     )
 
     def __str__(self):
