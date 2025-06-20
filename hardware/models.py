@@ -35,7 +35,9 @@ class Hardware(models.Model):
         default=HardwareStatus.IN_STORAGE,
     )
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    project_id = models.ForeignKey(Project, on_delete=models.CASCADE, null=True, blank=True)
+    project_id = models.ForeignKey(
+        Project, on_delete=models.CASCADE, null=True, blank=True
+    )
 
 
 class HardwareHistory(models.Model):
