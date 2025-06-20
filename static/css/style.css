@@ -7,43 +7,43 @@
 */
 
 header {
-  width: 100%;
-  padding: var(--spacing-lg);
-  flex-shrink: 0;
+    width: 100%;
+    padding: var(--spacing-lg);
+    flex-shrink: 0;
 }
 
 header nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 header nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: var(--spacing-xl);
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-xl);
 }
 
 header nav ul li a {
-  color: var(--primary-color);
-  text-decoration: none;
-  font-weight: var(--font-weight-bold);
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: var(--border-radius);
-  transition: 0.2s ease-in-out;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: var(--font-weight-bold);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius);
+    transition: 0.2s ease-in-out;
 }
 
 header nav ul li a:hover,
 header nav ul li a:focus {
-  color: var(--secondary-color);
-  transition: 0.2s ease-in-out;
-  text-decoration: none;
+    color: var(--secondary-color);
+    transition: 0.2s ease-in-out;
+    text-decoration: none;
 }
 
 header nav ul li a.selected {
-  background-color: var(--tertiary-color);
-  color: var(--primary-color);
+    background-color: var(--tertiary-color);
+    color: var(--primary-color);
 }
 
 /* 
@@ -53,10 +53,10 @@ header nav ul li a.selected {
 */
 
 main {
-  flex-grow: 1;
-  width: 100%;
-  display: flex;
-  height: calc(100vh - 120px);
+    flex-grow: 1;
+    width: 100%;
+    display: flex;
+    height: calc(100vh - 120px);
 }
 
 /* 
@@ -66,26 +66,26 @@ main {
 */
 
 panel {
-  width: 10%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  border-top: var(--border-width) solid var(--primary-color);
-  border-right: var(--border-width) solid var(--primary-color);
-  border-top-right-radius: var(--border-radius);
-  flex-shrink: 0;
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-top: var(--border-width) solid var(--primary-color);
+    border-right: var(--border-width) solid var(--primary-color);
+    border-top-right-radius: var(--border-radius);
+    flex-shrink: 0;
 }
 
 panel .inner-panel {
-  width: 75%;
-  margin: auto, 0;
+    width: 75%;
+    margin: auto, 0;
 }
 
 panel .inner-panel ul li a.selected {
-  background-color: var(--secondary-color);
-  border-radius: var(--border-radius);
-  color: var(--body-bg);
+    background-color: var(--secondary-color);
+    border-radius: var(--border-radius);
+    color: var(--body-bg);
 }
 
 /* 
@@ -95,64 +95,64 @@ panel .inner-panel ul li a.selected {
 */
 
 container {
-  width: 90%;
-  border-top: var(--border-width) solid var(--primary-color);
-  flex-shrink: 0;
-  padding: var(--spacing-xs);
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  overflow: hidden;
+    width: 90%;
+    border-top: var(--border-width) solid var(--primary-color);
+    flex-shrink: 0;
+    padding: var(--spacing-xs);
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 container content-nav {
-  display: flex;
-  width: 100%;
-  gap: var(--spacing-sm);
+    display: flex;
+    width: 100%;
+    gap: var(--spacing-sm);
 }
 
 container content-nav .action-tab {
-  width: 100%;
-  text-align: center;
-  border-top: var(--border-width) solid var(--primary-color);
-  border-left: var(--border-width) solid var(--primary-color);
-  border-right: var(--border-width) solid var(--primary-color);
-  border-top-left-radius: var(--border-radius);
-  border-top-right-radius: var(--border-radius);
-  padding: var(--spacing-sm);
+    width: 100%;
+    text-align: center;
+    border-top: var(--border-width) solid var(--primary-color);
+    border-left: var(--border-width) solid var(--primary-color);
+    border-right: var(--border-width) solid var(--primary-color);
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    padding: var(--spacing-sm);
 }
 
 container content-nav .action-tab.blocked {
-  cursor: not-allowed;
+    cursor: not-allowed;
 }
 
 container content-nav .action-tab:hover,
 container content-nav .action-tab:focus,
 container content-nav .action-tab.selected:hover,
 container content-nav .action-tab.selected:focus {
-  background-color: var(--tertiary-color);
-  color: var(--body-bg);
-  transition: 0.2s ease-in-out;
+    background-color: var(--tertiary-color);
+    color: var(--body-bg);
+    transition: 0.2s ease-in-out;
 }
 
 container content-nav .action-tab.blocked:hover,
 container content-nav .action-tab.blocked:focus,
 container content-nav .action-tab.blocked.selected:hover,
 container content-nav .action-tab.blocked.selected:focus {
-  background-color: inherit;
-  color: inherit;
+    background-color: inherit;
+    color: inherit;
 }
 
 container content-nav .action-tab.selected {
-  background-color: var(--secondary-color);
-  color: var(--body-bg);
+    background-color: var(--secondary-color);
+    color: var(--body-bg);
 }
 
 container content {
-  border: var(--border-width) solid var(--primary-color);
-  flex-grow: 1;
-  padding: var(--spacing-md);
-  overflow-y: scroll;
+    border: var(--border-width) solid var(--primary-color);
+    flex-grow: 1;
+    padding: var(--spacing-md);
+    overflow-y: scroll;
 }
 
 /* 
@@ -162,103 +162,103 @@ container content {
 */
 
 .user-list-header {
-  display: flex;
-  align-items: center;
-  padding: var(--spacing-sm) var(--spacing-md);
-  background-color: var(--secondary-color);
-  color: var(--body-bg);
-  font-weight: var(--font-weight-bold);
-  margin-bottom: var(--spacing-xs);
-  border-radius: var(--border-radius);
-  gap: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: var(--secondary-color);
+    color: var(--body-bg);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-xs);
+    border-radius: var(--border-radius);
+    gap: var(--spacing-sm);
 }
 
 .user-list-header span {
-  flex: 1 1 0;
-  min-width: 120px;
-  padding-right: var(--spacing-sm);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    flex: 1 1 0;
+    min-width: 120px;
+    padding-right: var(--spacing-sm);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .user-list-header .user-id-header {
-  flex: 0 0 80px;
-  min-width: auto;
+    flex: 0 0 80px;
+    min-width: auto;
 }
 
 .user-list-header .actions-header {
-  flex: 0 0 130px;
-  min-width: auto;
-  margin-left: auto;
-  text-align: right;
-  padding-right: 0;
+    flex: 0 0 130px;
+    min-width: auto;
+    margin-left: auto;
+    text-align: right;
+    padding-right: 0;
 }
 
 .user-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xs);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
 }
 
 .user-item {
-  border: var(--border-width) solid var(--primary-color);
-  border-radius: var(--border-radius);
-  background-color: var(--body-bg);
+    border: var(--border-width) solid var(--primary-color);
+    border-radius: var(--border-radius);
+    background-color: var(--body-bg);
 }
 
 .user-summary {
-  display: flex;
-  align-items: center;
-  padding: var(--spacing-sm) var(--spacing-md);
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
-  gap: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    gap: var(--spacing-sm);
 }
 
 .user-summary:hover {
-  background-color: #f0f0f0;
+    background-color: #f0f0f0;
 }
 
 .user-summary span {
-  flex: 1 1 0;
-  min-width: 120px;
-  padding-right: var(--spacing-sm);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    flex: 1 1 0;
+    min-width: 120px;
+    padding-right: var(--spacing-sm);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .user-summary .user-id {
-  flex: 0 0 80px;
-  min-width: auto;
+    flex: 0 0 80px;
+    min-width: auto;
 }
 
 .user-summary .expand-icon {
-  flex: 0 0 auto;
-  min-width: 130px;
-  margin-left: auto;
-  padding-right: 0;
-  display: flex;
-  gap: var(--spacing-xs);
-  justify-content: flex-end;
+    flex: 0 0 auto;
+    min-width: 130px;
+    margin-left: auto;
+    padding-right: 0;
+    display: flex;
+    gap: var(--spacing-xs);
+    justify-content: flex-end;
 }
 
 .user-details {
-  display: none;
-  padding: var(--spacing-md);
-  border-top: var(--border-width) dashed var(--primary-color);
-  background-color: #f9f9f9;
+    display: none;
+    padding: var(--spacing-md);
+    border-top: var(--border-width) dashed var(--primary-color);
+    background-color: #f9f9f9;
 }
 
 .user-details p {
-  margin-bottom: var(--spacing-sm);
-  font-size: 0.9rem;
-  color: var(--secondary-color);
+    margin-bottom: var(--spacing-sm);
+    font-size: 0.9rem;
+    color: var(--secondary-color);
 }
 
 .user-details p strong {
-  color: var(--tertiary-color);
+    color: var(--tertiary-color);
 }
 
 /* 
@@ -268,45 +268,45 @@ container content {
 */
 
 .user-details button.edit {
-  background: var(--warning-color);
-  color: var(--body-bg);
-  padding: var(--spacing-sm);
-  border-radius: var(--border-radius);
+    background: var(--warning-color);
+    color: var(--body-bg);
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius);
 }
 
 .user-details button.edit:hover {
-  background-color: #dba607;
+    background-color: #dba607;
 }
 
 .user-details button.delete {
-  background: var(--error-color);
-  color: var(--body-bg);
-  padding: var(--spacing-sm);
-  border-radius: var(--border-radius);
+    background: var(--error-color);
+    color: var(--body-bg);
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius);
 }
 
 .user-details button.delete:hover {
-  background: #a71d2a;
+    background: #a71d2a;
 }
 
 a.edit,
 a.delete {
-  display: inline-block;
-  padding: 0.5rem 1.2rem;
-  border-radius: 4px;
-  text-decoration: none;
-  font-weight: bold;
-  color: #fff;
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #fff;
 }
 a.edit {
-  background: var(--warning-color);
+    background: var(--warning-color);
 }
 a.edit:hover {
-  background-color: #dba607;
+    background-color: #dba607;
 }
 a.delete {
-  background: #dc3545;
+    background: #dc3545;
 }
 a.delete:hover {
-  background: #a71d2a;
+    background: #a71d2a;
 }

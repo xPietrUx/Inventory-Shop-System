@@ -5,36 +5,36 @@
 */
 
 :root {
-  /* Colors */
-  --text-color: #000000;
-  --body-bg: #ffffff;
-  --primary-color: #8f91a2;
-  --secondary-color: #505a5b;
-  --tertiary-color: #343f3e;
-  --success-color: #28a745;
-  --warning-color: #ffc107;
-  --error-color: #dc3545;
-  --box-shadow-prop: 0px 0px 20px 0px rgba(56, 56, 95, 1);
+    /* Colors */
+    --text-color: #000000;
+    --body-bg: #ffffff;
+    --primary-color: #8f91a2;
+    --secondary-color: #505a5b;
+    --tertiary-color: #343f3e;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --error-color: #dc3545;
+    --box-shadow-prop: 0px 0px 20px 0px rgba(56, 56, 95, 1);
 
-  /* Typography */
-  --font-family-prop: ui-sans-serif, -apple-system, system-ui, Segoe UI,
-    Helvetica, Apple Color Emoji, Arial, sans-serif, Segoe UI Emoji,
-    Segoe UI Symbol;
-  --base-font-size: 1rem;
-  --font-weight-normal: 400;
-  --font-weight-bold: 700;
+    /* Typography */
+    --font-family-prop: ui-sans-serif, -apple-system, system-ui, Segoe UI,
+        Helvetica, Apple Color Emoji, Arial, sans-serif, Segoe UI Emoji,
+        Segoe UI Symbol;
+    --base-font-size: 1rem;
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
 
-  /* Spacing */
-  --spacing-unit: 1rem;
-  --spacing-xs: calc(var(--spacing-unit) * 0.25);
-  --spacing-sm: calc(var(--spacing-unit) * 0.5);
-  --spacing-md: var(--spacing-unit);
-  --spacing-lg: calc(var(--spacing-unit) * 1.5);
-  --spacing-xl: calc(var(--spacing-unit) * 3);
+    /* Spacing */
+    --spacing-unit: 1rem;
+    --spacing-xs: calc(var(--spacing-unit) * 0.25);
+    --spacing-sm: calc(var(--spacing-unit) * 0.5);
+    --spacing-md: var(--spacing-unit);
+    --spacing-lg: calc(var(--spacing-unit) * 1.5);
+    --spacing-xl: calc(var(--spacing-unit) * 3);
 
-  /* Borders */
-  --border-width: 1px;
-  --border-radius: 0.25rem;
+    /* Borders */
+    --border-width: 1px;
+    --border-radius: 0.25rem;
 }
 
 /* 
@@ -46,60 +46,60 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html {
-  font-size: var(--base-font-size);
-  font-family: var(--font-family-prop);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  height: 100%;
+    font-size: var(--base-font-size);
+    font-family: var(--font-family-prop);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    height: 100%;
 }
 
 body {
-  color: var(--text-color);
-  background-color: var(--body-bg);
-  font-weight: var(--font-weight-normal);
-  display: flex;
-  min-height: 100%;
-  flex-direction: column;
-  margin: 0;
+    color: var(--text-color);
+    background-color: var(--body-bg);
+    font-weight: var(--font-weight-normal);
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+    margin: 0;
 }
 
 ul li {
-  list-style: none;
+    list-style: none;
 }
 
 a {
-  color: var(--text-color);
-  text-decoration: none;
+    color: var(--text-color);
+    text-decoration: none;
 }
 
 img {
-  max-width: 100%;
-  height: auto;
-  display: block;
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 button {
-  appearance: none;
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  text-align: inherit;
-  text-align: none;
-  box-shadow: none;
+    appearance: none;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    text-align: inherit;
+    text-align: none;
+    box-shadow: none;
 }
 
 button:hover,
 button:focus {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 /* 
@@ -114,21 +114,21 @@ h3,
 h4,
 h5,
 h6 {
-  margin-bottom: var(--spacing-sm);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.2;
+    margin-bottom: var(--spacing-sm);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2;
 }
 
 h1 {
-  font-size: calc(var(--base-font-size) * 2.5);
+    font-size: calc(var(--base-font-size) * 2.5);
 }
 h2 {
-  font-size: calc(var(--base-font-size) * 2);
+    font-size: calc(var(--base-font-size) * 2);
 }
 h3 {
-  font-size: calc(var(--base-font-size) * 1.75);
+    font-size: calc(var(--base-font-size) * 1.75);
 }
 
 p {
-  margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
 }
