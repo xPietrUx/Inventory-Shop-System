@@ -1,5 +1,5 @@
-@import url('../main.css');
-@import url('../style.css');
+@import url("/main.css");
+@import url("/style.css");
 
 /* 
     ==========================================================================
@@ -32,8 +32,9 @@
 	font-weight: var(--font-weight-bold);
 }
 
-.user-form-container input[type='text'],
-.user-form-container input[type='email'] {
+.user-form-container input[type="text"],
+.user-form-container input[type="password"],
+.user-form-container input[type="email"] {
 	padding: 0.5rem;
 	border: var(--border-width) solid var(--primary-color);
 	border-radius: var(--border-radius);

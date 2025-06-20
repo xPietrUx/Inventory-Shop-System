@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Users List
+{% endblock title %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static '/css/list.css' %}" />
+{% endblock extra_css %}
+{% block page_title %}
+    Users List
+{% endblock page_title %}
+{% block content %}
+    <panel>
+    <div class="inner-panel">
+        <h3>Users Tables:</h3>
+        <ul>
+            <li>
+                <a href="{% url 'users:users_list' %}" class="selected">Users</a>
+            </li>
+            <li>
+                <a href="{% url 'users:roles_list' %}">Roles</a>
+            </li>
+        </ul>
+    </div>
+    </panel>
+    <container>
+    <content-nav>
+        <a href="{% url 'users:users_list' %}" class="action-tab selected">View Users</a>
+        <a href="{% url 'users:users_add' %}" class="action-tab">Add User</a>
+    </content-nav>
+    <content>
+        <div class="user-list-header">
+            <span class="user-id-header">ID</span>
+            <span class="user-name-header">First Name</span>
+            <span class="user-email-header">E-mail</span>
+            <span class="user-role-header">Position</span>
+            <span class="expand-icon-header"></span>
+        </div>
+        <div class="user-list">
+            {% for user in users %}
+                <div class="user-item">
+                    <div class="user-summary">
+                        <span class="user-id">{{ user.id }}</span>
+                        <span class="user-name">{{ user.name }}</span>
+                        <span class="user-email">{{ user.email }}</span>
+                        <span class="user-role">{{ user.position }}</span>
+                        <span class="expand-icon">▼</span>
+                    </div>
+                    <div class="user-details">
+                        <p>
+                            <strong>First Name:</strong> {{ user.name }}
+                        </p>
+                        <p>
+                            <strong>Last Name:</strong> {{ user.surname }}
+                        </p>
+                        <p>
+                            <strong>E-mail:</strong> {{ user.email }}
+                        </p>
+                        <p>
+                            <strong>Position:</strong> {{ user.position }}
+                        </p>
+                        <p>
+                            <strong>Role:</strong>
+                            {% if user.id_role %}
+                                {{ user.id_role.role_name }}
+                            {% else %}
+                                No role assigned
+                            {% endif %}
+                        </p>
+                        <h3>Actions</h3>
+                        <a href="{% url 'users:users_edit' pk=user.pk %}" class="edit">Edit</a>
+                        <a href="{% url 'users:users_delete' pk=user.pk %}" class="delete">Delete</a>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="user-item">
+                    <div class="user-summary">
+                        <span class="empty-list-message empty-list-message-centered">No users to display.</span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </content>
+    </container>
+{% endblock content %}
+{% block extra_js %}
+    <script>
+    $(document).ready(function () {
+      $('.user-summary').on('click', function (event) {
+        if ($(event.target).closest('a').length && $(event.target).closest('.user-summary').length) {
+          return;
+        }
+        $(this).siblings('.user-details').slideToggle();
+        $(this).find('.expand-icon').toggleClass('expanded');
+      });
+    });
+    </script>
+{% endblock extra_js %}
