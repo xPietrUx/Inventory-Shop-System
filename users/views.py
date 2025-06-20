@@ -58,7 +58,7 @@ def users_list_view(request):
 
     return render(
         request,
-        "users/users_list.html",
+        "users/users/users_list.html",
         {
             "users": users,
             "active_nav": active_nav,
@@ -81,7 +81,7 @@ def users_add_view(request):
 
     return render(
         request,
-        "users/users_add.html",
+        "users/users/users_add.html",
         {
             "form": form,
             "active_nav": active_nav,
@@ -106,7 +106,7 @@ def users_edit_view(request, pk):
 
     return render(
         request,
-        "users/users_edit.html",
+        "users/users/users_edit.html",
         {
             "form": form,
             "user": user,
@@ -127,7 +127,7 @@ def users_delete_view(request, pk):
 
     return render(
         request,
-        "users/users_delete.html",
+        "users/users/users_delete.html",
         {
             "user": user,
             "active_nav": active_nav,
@@ -143,7 +143,7 @@ def roles_list_view(request):
 
     return render(
         request,
-        "roles/roles_list.html",
+        "users/roles/roles_list.html",
         {
             "roles": roles,
             "active_nav": active_nav,
@@ -164,7 +164,7 @@ def roles_add_view(request):
 
     return render(
         request,
-        "roles/roles_add.html",
+        "users/roles/roles_add.html",
         {
             "form": form,
             "active_nav": active_nav,
@@ -186,7 +186,7 @@ def roles_edit_view(request, pk):
 
     return render(
         request,
-        "roles/roles_edit.html",
+        "users/roles/roles_edit.html",
         {
             "form": form,
             "active_nav": active_nav,
@@ -204,7 +204,7 @@ def roles_delete_view(request, pk):
 
     return render(
         request,
-        "roles/roles_delete.html",
+        "users/roles/roles_delete.html",
         {
             "role": role,
             "active_nav": active_nav,
