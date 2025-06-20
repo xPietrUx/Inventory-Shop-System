@@ -78,7 +78,7 @@
 .user-form-container a.cancel {
 	width: 100%;
 	background: var(--secondary-color);
-	color: var(--text-color);
+	color: var(--body-bg);
 	font-size: 1.1em;
 	font-weight: var(--font-weight-bold);
 	border-radius: var(--border-radius);
@@ -90,5 +90,5 @@
 }
 
 .user-form-container a.cancel:hover {
-	background: #d1d2d2;
+	background: var(--tertiary-color);
 }
