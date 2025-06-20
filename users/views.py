@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Users
+from .models import Users, Roles
 from django import forms
 
 
@@ -37,6 +37,20 @@ class UsersForm(forms.ModelForm):
         }
 
 
+class RolesForm(forms.ModelForm):
+    class Meta:
+        model = Roles
+        fields = [
+            "role_name",
+            "description",
+        ]
+        widgets = {
+            "role_name": forms.TextInput(attrs={"placeholder": "Name"}),
+            "description": forms.TextInput(attrs={"placeholder": "Description"}),
+        }
+
+
+# users views
 def users_list_view(request):
     users = Users.objects.all()
     active_nav = "users"
@@ -118,5 +132,81 @@ def users_delete_view(request, pk):
             "user": user,
             "active_nav": active_nav,
             "active_page_title": active_page_title,
+        },
+    )
+
+
+# roles views
+def roles_list_view(request):
+    roles = Roles.objects.all()
+    active_nav = "users"
+
+    return render(
+        request,
+        "roles/roles_list.html",
+        {
+            "roles": roles,
+            "active_nav": active_nav,
+        },
+    )
+
+
+def roles_add_view(request):
+    active_nav = "users"
+
+    if request.method == "POST":
+        form = RolesForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("users:roles_list")
+    else:
+        form = RolesForm()
+
+    return render(
+        request,
+        "roles/roles_add.html",
+        {
+            "form": form,
+            "active_nav": active_nav,
+        },
+    )
+
+
+def roles_edit_view(request, pk):
+    role = get_object_or_404(Roles, pk=pk)
+    active_nav = "users"
+
+    if request.method == "POST":
+        form = RolesForm(request.POST, instance=role)
+        if form.is_valid():
+            form.save()
+            return redirect("users:roles_list")
+    else:
+        form = RolesForm(instance=role)
+
+    return render(
+        request,
+        "roles/roles_edit.html",
+        {
+            "form": form,
+            "active_nav": active_nav,
+        },
+    )
+
+
+def roles_delete_view(request, pk):
+    role = get_object_or_404(Roles, pk=pk)
+    active_nav = "users"
+
+    if request.method == "POST":
+        role.delete()
+        return redirect("users:roles_list")
+
+    return render(
+        request,
+        "roles/roles_delete.html",
+        {
+            "role": role,
+            "active_nav": active_nav,
         },
     )
