@@ -58,7 +58,7 @@ def users_list_view(request):
 
     return render(
         request,
-        "users/users/users_list.html",
+        "users/users_list.html",
         {
             "users": users,
             "active_nav": active_nav,
