@@ -1,0 +1,47 @@
+@import url('/main.css');
+@import url('/style.css');
+@import url('add_edit.css');
+
+/* 
+    ==========================================================================
+        Delete Form
+    ==========================================================================
+*/
+
+.user-form-container .form-actions {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	margin-top: 1.5rem;
+}
+
+.user-form-container button.delete {
+	background: var(--error-color);
+	color: var(--body-bg);
+	padding: 0.75rem 2rem;
+	border-radius: var(--border-radius);
+	font-weight: var(--font-weight-bold);
+	cursor: pointer;
+	border: none;
+	transition: background 0.2s;
+}
+
+.user-form-container button.delete:hover {
+	background: #a71d2a;
+}
+
+.user-form-container a.cancel {
+	text-align: center;
+	background: var(--secondary-color);
+	color: var(--body-bg);
+	padding: 0.75rem 2rem;
+	border-radius: var(--border-radius);
+	font-weight: var(--font-weight-bold);
+	text-decoration: none;
+	display: inline-block;
+	transition: background 0.2s;
+}
+
+.user-form-container a.cancel:hover {
+	background: var(--tertiary-color);
+}

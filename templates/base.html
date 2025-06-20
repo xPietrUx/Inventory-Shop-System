@@ -22,7 +22,8 @@
       <nav>
         <ul>
           <li>
-            <a href="" class="{% if active_nav == 'users' %}selected{% endif %}">Users</a>
+            <a href="{% url 'users:users_list' %}"
+               class="{% if active_nav == 'users' %}selected{% endif %}">Users</a>
           </li>
           <li>
             <a href="{% url 'licenses:license_list' %}"

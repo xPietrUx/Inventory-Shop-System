@@ -9,7 +9,7 @@ class Roles(models.Model):
     description = models.TextField()
 
     def __str__(self):
-        return f"Rola {self.role_name} o opisie {self.description}"
+        return f"Role: {self.role_name}. Description: {self.description}"
 
 
 class Users(AbstractUser):
@@ -18,8 +18,8 @@ class Users(AbstractUser):
     email = models.EmailField(unique=True)
     position = models.CharField(max_length=255)
     id_role = models.ForeignKey(
-        Roles, on_delete=models.PROTECT, null=True, blank=True, related_name="users"
+        Roles, on_delete=models.SET_NULL, null=True, blank=True, related_name="users"
     )
 
     def __str__(self):
-        return f"{self.name} {self.surname} na stanowisku: {self.position}"
+        return f"{self.name} {self.surname}. Position: {self.position}"
