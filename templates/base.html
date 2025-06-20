@@ -33,10 +33,6 @@
             <a href="{% url 'hardware:hardware_list' %}"
                class="{% if active_nav == 'hardware' %}selected{% endif %}">Hardware</a>
           </li>
-          <li>
-            <a href="{% url 'hardware:project_list' %}"
-               class="{% if active_nav == 'projects' %}selected{% endif %}">Projects</a>
-          </li>
         </ul>
         <h1>
           {% block page_title %}
