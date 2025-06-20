@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Edit Role
+{% endblock title %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static '/css/roles/roles-edit.css' %}" />
+{% endblock extra_css %}
+{% block page_title %}
+    Edit Role
+{% endblock page_title %}
+{% block content %}
+    <panel>
+    <div class="inner-panel">
+        <h3>User Tables:</h3>
+        <ul>
+            <li>
+                <a href="{% url 'users:users_list' %}">Users</a>
+            </li>
+            <li>
+                <a href="{% url 'users:roles_list' %}" class="selected">Roles</a>
+            </li>
+        </ul>
+    </div>
+    </panel>
+    <container>
+    <content-nav>
+        <a href="{% url 'users:roles_list' %}" class="action-tab">View Roles</a>
+        <a href="{% url 'users:roles_add' %}" class="action-tab">Add Role</a>
+        <a class="action-tab selected">Edit Role</a>
+    </content-nav>
+    <content>
+        <div class="user-form-container">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_role_name">Name:</label>
+                    {{ form.role_name }}
+                    {% if form.role_name.errors %}<div class="form-error">{{ form.role_name.errors }}</div>{% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="id_description">Description:</label>
+                    {{ form.description }}
+                    {% if form.description.errors %}<div class="form-error">{{ form.description.errors }}</div>{% endif %}
+                </div>
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+    </content>
+    </container>
+{% endblock content %}

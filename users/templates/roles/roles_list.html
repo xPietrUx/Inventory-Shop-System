@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Roles List
+{% endblock title %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static '/css/roles/roles-list.css' %}" />
+{% endblock extra_css %}
+{% block page_title %}
+    Roles List
+{% endblock page_title %}
+{% block content %}
+    <panel>
+    <div class="inner-panel">
+        <h3>Users Tables:</h3>
+        <ul>
+            <li>
+                <a href="{% url 'users:users_list' %}">Users</a>
+            </li>
+            <li>
+                <a href="{% url 'users:roles_list' %}" class="selected">Roles</a>
+            </li>
+        </ul>
+    </div>
+    </panel>
+    <container>
+    <content-nav>
+        <a href="{% url 'users:roles_list' %}" class="action-tab selected">View Roles</a>
+        <a href="{% url 'users:roles_add' %}" class="action-tab">Add Roles</a>
+    </content-nav>
+    <content>
+        <div class="user-list-header">
+            <span class="user-id-header">ID</span>
+            <span class="user-name-header">Name</span>
+            <span class="expand-icon-header"></span>
+        </div>
+        <div class="user-list">
+            {% for role in roles %}
+                <div class="user-item">
+                    <div class="user-summary">
+                        <span class="user-id">{{ role.id }}</span>
+                        <span class="user-name">{{ role.role_name }}</span>
+                        <span class="expand-icon">▼</span>
+                    </div>
+                    <div class="user-details">
+                        <p>
+                            <strong>Name:</strong> {{ role.role_name }}
+                        </p>
+                        <p>
+                            <strong>Description:</strong> {{ role.description }}
+                        </p>
+                        <h3>Actions</h3>
+                        <a href="{% url 'users:roles_edit' pk=role.pk %}" class="edit">Edit</a>
+                        <a href="{% url 'users:roles_delete' pk=role.pk %}" class="delete">Delete</a>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="user-item">
+                    <div class="user-summary">
+                        <span class="empty-list-message empty-list-message-centered">No roles to display.</span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </content>
+    </container>
+{% endblock content %}
+{% block extra_js %}
+    <script>
+    $(document).ready(function () {
+      $('.user-summary').on('click', function (event) {
+        if ($(event.target).closest('a').length && $(event.target).closest('.user-summary').length) {
+          return;
+        }
+        $(this).siblings('.user-details').slideToggle();
+        $(this).find('.expand-icon').toggleClass('expanded');
+      });
+    });
+    </script>
+{% endblock extra_js %}
