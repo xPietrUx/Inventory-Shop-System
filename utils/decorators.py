@@ -8,9 +8,9 @@ def role_required(*allowed_roles, redirect_to="hardware:hardware_list"):
     def decorator(view_func):
         @wraps(view_func)
         def _wrapped_view(request, *args, **kwargs):
-            user_role = getattr(request.user, "role", None)
+            user_role = getattr(request.user, "id_role", None)
 
-            if not user_role or user_role.name not in allowed_roles:
+            if not user_role or user_role.role_name not in allowed_roles:
                 messages.error(
                     request, "You don't have permission to access this site."
                 )
