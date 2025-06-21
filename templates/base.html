@@ -42,7 +42,13 @@
         </h1>
         <ul>
           <li>
-            <a href="" class="{% if active_nav == 'sing_in' %}selected{% endif %}">Sign in</a>
+            {% if user.is_authenticated %}
+              <a href="{% url 'users:signout' %}"
+                 class="{% if active_nav == 'sign_in' %}selected{% endif %}">Sign out</a>
+            {% else %}
+              <a href="{% url 'users:signin' %}"
+                 class="{% if active_nav == 'sign_in' %}selected{% endif %}">Sign in</a>
+            {% endif %}
           </li>
           <li>
             <a href="" class="{% if active_nav == 'about' %}selected{% endif %}">About</a>
