@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Add License
+{% endblock title %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/add_edit.css' %}" />
+{% endblock extra_css %}
+{% block page_title %}
+    Add License
+{% endblock page_title %}
+{% block content %}
+    <panel>
+    <div class="inner-panel">
+        <h3>License Tables:</h3>
+        <ul>
+            <li>
+                <a href="{% url 'licenses:software_list' %}">Software</a>
+            </li>
+            <li>
+                <a href="{% url 'licenses:license_list' %}" class="selected">Licenses</a>
+            </li>
+        </ul>
+    </div>
+    </panel>
+    <container>
+    <content-nav>
+        <a href="{% url 'licenses:license_list' %}" class="action-tab">View Licenses</a>
+        <a href="{% url 'licenses:license_add' %}" class="action-tab selected">Add License</a>
+    </content-nav>
+    <content>
+        <div class="user-form-container">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_software_id">Software:</label>
+                    {{ form.software_id }}
+                    {% if form.software_id.errors %}<div class="form-error">{{ form.software_id.errors }}</div>{% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="id_license_key">License Key:</label>
+                    {{ form.license_key }}
+                    {% if form.license_key.errors %}<div class="form-error">{{ form.license_key.errors }}</div>{% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="id_user_id">User:</label>
+                    {{ form.user_id }}
+                    {% if form.user_id.errors %}<div class="form-error">{{ form.user_id.errors }}</div>{% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="id_purchase_date">Purchase Date:</label>
+                    {{ form.purchase_date }}
+                    {% if form.purchase_date.errors %}<div class="form-error">{{ form.purchase_date.errors }}</div>{% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="id_expiration_date">Expiration Date:</label>
+                    {{ form.expiration_date }}
+                    {% if form.expiration_date.errors %}<div class="form-error">{{ form.expiration_date.errors }}</div>{% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="id_license_type">Type:</label>
+                    {{ form.license_type }}
+                    {% if form.license_type.errors %}<div class="form-error">{{ form.license_type.errors }}</div>{% endif %}
+                </div>
+                <button type="submit">Add License</button>
+            </form>
+        </div>
+    </content>
+    </container>
+{% endblock content %}

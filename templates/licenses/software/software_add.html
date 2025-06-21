@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Add Software
+{% endblock title %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/add_edit.css' %}" />
+{% endblock extra_css %}
+{% block page_title %}
+    Add Software
+{% endblock page_title %}
+{% block content %}
+    <panel>
+    <div class="inner-panel">
+        <h3>License Tables:</h3>
+        <ul>
+            <li>
+                <a href="{% url 'licenses:software_list' %}">Software</a>
+            </li>
+            <li>
+                <a href="{% url 'licenses:license_list' %}">Licenses</a>
+            </li>
+        </ul>
+    </div>
+    </panel>
+    <container>
+    <content-nav>
+        <a href="{% url 'licenses:software_list' %}" class="action-tab">View Software</a>
+        <a href="{% url 'licenses:software_add' %}" class="action-tab selected">Add Software</a>
+    </content-nav>
+    <content>
+        <div class="user-form-container">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_name">Name:</label>
+                    {{ form.name }}
+                    {% if form.name.errors %}<div class="form-error">{{ form.name.errors }}</div>{% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="id_producer">Producer:</label>
+                    {{ form.producer }}
+                    {% if form.producer.errors %}<div class="form-error">{{ form.producer.errors }}</div>{% endif %}
+                </div>
+                <button type="submit">Add Software</button>
+            </form>
+        </div>
+    </content>
+    </container>
+{% endblock content %}

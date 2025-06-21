@@ -7,6 +7,9 @@ User = get_user_model()
 class HardwareCategory(models.Model):
     name = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.name
+
 
 class Project(models.Model):
     name = models.CharField(max_length=50)
@@ -14,6 +17,9 @@ class Project(models.Model):
     supervisor_id = models.ForeignKey(User, on_delete=models.CASCADE)
     start_date = models.DateField()
     end_date = models.DateField(null=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Hardware(models.Model):
@@ -34,12 +40,26 @@ class Hardware(models.Model):
         choices=HardwareStatus,
         default=HardwareStatus.IN_STORAGE,
     )
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    project_id = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    project_id = models.ForeignKey(
+        Project, on_delete=models.CASCADE, null=True, blank=True
+    )
+
+    def __str__(self):
+        return f"{self.name} ({self.inventory_number})"
 
 
 class HardwareHistory(models.Model):
+    class EventType(models.TextChoices):
+        ASSIGNED = "ASSIGNED", "Assigned to user"
+        RETURNED = "RETURNED", "Returned to storage"
+        REPAIR = "REPAIR", "Sent for repair"
+        UTILIZED = "UTILIZED", "Utilized"
+        CREATED = "CREATED", "Created"
+
     hardware_id = models.ForeignKey(Hardware, on_delete=models.CASCADE)
     event_date = models.DateField()
-    event_type = models.DateField()
+    event_type = models.CharField(
+        max_length=10, choices=EventType.choices, default=EventType.CREATED
+    )
     description = models.TextField()

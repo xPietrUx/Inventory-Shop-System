@@ -30,7 +30,8 @@
                class="{% if active_nav == 'licenses' or active_nav == 'software' %}selected{% endif %}">License</a>
           </li>
           <li>
-            <a href="" class="{% if active_nav == 'hardware' %}selected{% endif %}">Hardware</a>
+            <a href="{% url 'hardware:hardware_list' %}"
+               class="{% if active_nav == 'hardware' %}selected{% endif %}">Hardware</a>
           </li>
         </ul>
         <h1>
@@ -42,9 +43,6 @@
         <ul>
           <li>
             <a href="" class="{% if active_nav == 'sing_in' %}selected{% endif %}">Sign in</a>
-          </li>
-          <li>
-            <a href="" class="{% if active_nav == 'sing_up' %}selected{% endif %}">Sign up</a>
           </li>
           <li>
             <a href="" class="{% if active_nav == 'about' %}selected{% endif %}">About</a>

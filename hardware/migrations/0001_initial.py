@@ -88,7 +88,7 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 ("event_date", models.DateField()),
-                ("event_type", models.DateField()),
+                ("event_type", models.CharField(max_length=50)),
                 ("description", models.TextField()),
                 (
                     "hardware_id",
