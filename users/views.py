@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Users, Roles
 from django import forms
+from django.contrib.auth.hashers import make_password
 
 
-class UsersForm(forms.ModelForm):
+class UsersBaseForm(forms.ModelForm):
     class Meta:
         model = Users
         fields = [
@@ -13,7 +14,6 @@ class UsersForm(forms.ModelForm):
             "id_role",
             "email",
             "username",
-            "password",
         ]
         widgets = {
             "name": forms.TextInput(
@@ -31,10 +31,37 @@ class UsersForm(forms.ModelForm):
             "username": forms.TextInput(
                 attrs={"placeholder": "Username"},
             ),
-            "password": forms.PasswordInput(
-                attrs={"placeholder": "Password"},
-            ),
         }
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        password = self.cleaned_data.get("password")
+        if password:
+            user.password = make_password(password)
+        if commit:
+            user.save()
+        return user
+
+
+class UsersAddForm(UsersBaseForm):
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={"placeholder": "Password"}), required=True
+    )
+
+    class Meta(UsersBaseForm.Meta):
+        fields = UsersBaseForm.Meta.fields + ["password"]
+
+
+class UsersEditForm(UsersBaseForm):
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={"placeholder": "Leave blank to keep the current password."}
+        ),
+        required=False,
+    )
+
+    class Meta(UsersBaseForm.Meta):
+        fields = UsersBaseForm.Meta.fields + ["password"]
 
 
 class RolesForm(forms.ModelForm):
@@ -72,12 +99,12 @@ def users_add_view(request):
     active_page_title = "Users"
 
     if request.method == "POST":
-        form = UsersForm(request.POST)
+        form = UsersAddForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect("users:users_list")
     else:
-        form = UsersForm()
+        form = UsersAddForm()
 
     return render(
         request,
@@ -96,13 +123,13 @@ def users_edit_view(request, pk):
     active_page_title = f"Edit User: {user.username}"
 
     if request.method == "POST":
-        form = UsersForm(request.POST, instance=user)
+        form = UsersEditForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
             return redirect("users:users_list")
 
     else:
-        form = UsersForm(instance=user)
+        form = UsersEditForm(instance=user)
 
     return render(
         request,
