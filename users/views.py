@@ -87,7 +87,7 @@ class SigninForm(forms.ModelForm):
 
         widgets = {
             "username": forms.TextInput(attrs={"placeholder": "Username"}),
-            "password": forms.TextInput(attrs={"placeholder": "Password"}),
+            "password": forms.PasswordInput(attrs={"placeholder": "Password"}),
         }
 
 
