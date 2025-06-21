@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Users, Roles
 from django import forms
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth import login, logout, authenticate
 
 
 class UsersBaseForm(forms.ModelForm):
@@ -74,6 +75,17 @@ class RolesForm(forms.ModelForm):
         widgets = {
             "role_name": forms.TextInput(attrs={"placeholder": "Name"}),
             "description": forms.TextInput(attrs={"placeholder": "Description"}),
+        }
+
+
+class SigninForm(forms.ModelForm):
+    class Meta:
+        model = Users
+        fields = ["username", "password"]
+
+        widgets = {
+            "username": forms.TextInput(attrs={"placeholder": "Username"}),
+            "password": forms.TextInput(attrs={"placeholder": "Password"}),
         }
 
 
@@ -237,3 +249,35 @@ def roles_delete_view(request, pk):
             "active_nav": active_nav,
         },
     )
+
+
+# auth views
+def signin_view(request):
+    active_nav = "sign_in"
+
+    if request.method == "POST":
+        print(request.POST, flush=True)
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request, username=username, password=password)
+        if user:
+            login(request, user)
+            return redirect("users:users_list")
+        else:
+            return redirect("users:signin")
+    else:
+        form = SigninForm()
+
+    return render(
+        request,
+        "auth/signin.html",
+        {
+            "form": form,
+            "active_nav": active_nav,
+        },
+    )
+
+
+def signout_view(request):
+    logout(request)
+    return redirect("users:signin")
