@@ -274,7 +274,6 @@ def signin_view(request):
     active_nav = "sign_in"
 
     if request.method == "POST":
-        print(request.POST, flush=True)
         username = request.POST["username"]
         password = request.POST["password"]
         user = authenticate(request, username=username, password=password)
