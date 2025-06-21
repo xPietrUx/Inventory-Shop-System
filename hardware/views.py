@@ -1,12 +1,16 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Hardware, Project, HardwareHistory
 from .forms import HardwareForm, HardwareHistoryForm, ProjectForm
+from django.contrib.auth.decorators import login_required
+from utils.decorators import role_required
 
 # ===========================
 # Views dla modelu hardware
 # ===========================
 
 
+@login_required
+@role_required("Admin", "Operator")
 def hardware_list_view(request):
     hardware_list = Hardware.objects.all()
     active_nav = "hardware"
@@ -22,6 +26,8 @@ def hardware_list_view(request):
     )
 
 
+@login_required
+@role_required("Admin", "Operator")
 def hardware_add_view(request):
     if request.method == "POST":
         form = HardwareForm(request.POST)
@@ -45,6 +51,8 @@ def hardware_add_view(request):
     )
 
 
+@login_required
+@role_required("Admin", "Operator")
 def hardware_edit_view(request, pk):
     hardware_item = get_object_or_404(Hardware, pk=pk)
 
@@ -71,6 +79,8 @@ def hardware_edit_view(request, pk):
     )
 
 
+@login_required
+@role_required("Admin", "Operator")
 def hardware_delete_view(request, pk):
     hardware_item = get_object_or_404(Hardware, pk=pk)
 
@@ -97,6 +107,8 @@ def hardware_delete_view(request, pk):
 # ===========================
 
 
+@login_required
+@role_required("Admin", "Operator")
 def history_list_view(request):
     history_list = HardwareHistory.objects.all().order_by("-event_date")
     active_nav = "hardware"
@@ -117,6 +129,8 @@ def history_list_view(request):
 # ===========================
 
 
+@login_required
+@role_required("Admin", "Operator")
 def project_list_view(request):
     project_list = Project.objects.all()
     active_nav = "hardware"
@@ -132,6 +146,8 @@ def project_list_view(request):
     )
 
 
+@login_required
+@role_required("Admin", "Operator")
 def project_add_view(request):
     if request.method == "POST":
         form = ProjectForm(request.POST)
@@ -155,6 +171,8 @@ def project_add_view(request):
     )
 
 
+@login_required
+@role_required("Admin", "Operator")
 def project_edit_view(request, pk):
     project_item = get_object_or_404(Project, pk=pk)
 
@@ -181,6 +199,8 @@ def project_edit_view(request, pk):
     )
 
 
+@login_required
+@role_required("Admin", "Operator")
 def project_delete_view(request, pk):
     project_item = get_object_or_404(Project, pk=pk)
 

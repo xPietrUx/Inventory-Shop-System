@@ -17,4 +17,7 @@ urlpatterns = [
     path("roles/<int:pk>/delete/", views.roles_delete_view, name="roles_delete"),
     # redirect from / to users/
     path("", RedirectView.as_view(url="users/", permanent=False)),
+    # auth paths
+    path("signin/", views.signin_view, name="signin"),
+    path("signout/", views.signout_view, name="signout"),
 ]
