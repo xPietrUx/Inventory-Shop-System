@@ -2,6 +2,7 @@ from django import forms
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Software, License
 from django.contrib.auth.decorators import login_required
+from utils.decorators import role_required
 
 
 class SoftwareForm(forms.ModelForm):
@@ -41,6 +42,7 @@ class LicenseForm(forms.ModelForm):
 
 
 @login_required
+@role_required("Admin", "Operator")
 def software_list_view(request):
     software_items = Software.objects.all()
     active_nav = "software"
@@ -57,6 +59,7 @@ def software_list_view(request):
 
 
 @login_required
+@role_required("Admin", "Operator")
 def software_add_view(request):
     active_nav = "software"
     active_page_title = "Dodaj Oprogramowanie"
@@ -79,6 +82,7 @@ def software_add_view(request):
 
 
 @login_required
+@role_required("Admin", "Operator")
 def software_edit_view(request, pk):
     software_instance = get_object_or_404(Software, pk=pk)
     active_nav = "software"
@@ -105,6 +109,7 @@ def software_edit_view(request, pk):
 
 
 @login_required
+@role_required("Admin", "Operator")
 def software_delete_view(request, pk):
     software_instance = get_object_or_404(Software, pk=pk)
     active_nav = "software"
@@ -131,6 +136,7 @@ def software_delete_view(request, pk):
 
 
 @login_required
+@role_required("Admin", "Operator")
 def license_list_view(request):
     license_items = License.objects.all()
     active_nav = "licenses"
@@ -147,6 +153,7 @@ def license_list_view(request):
 
 
 @login_required
+@role_required("Admin", "Operator")
 def license_add_view(request):
     active_nav = "licenses"
     active_page_title = "Dodaj Licencję"
@@ -169,6 +176,7 @@ def license_add_view(request):
 
 
 @login_required
+@role_required("Admin", "Operator")
 def license_edit_view(request, pk):
     license_instance = get_object_or_404(License, pk=pk)
     active_nav = "licenses"
@@ -195,6 +203,7 @@ def license_edit_view(request, pk):
 
 
 @login_required
+@role_required("Admin", "Operator")
 def license_delete_view(request, pk):
     license_instance = get_object_or_404(License, pk=pk)
     active_nav = "licenses"
