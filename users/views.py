@@ -4,6 +4,7 @@ from django import forms
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from utils.decorators import role_required
 
 
 class UsersBaseForm(forms.ModelForm):
@@ -51,7 +52,7 @@ class UsersAddForm(UsersBaseForm):
     )
 
     class Meta(UsersBaseForm.Meta):
-        fields = UsersBaseForm.Meta.fields + ["password"]
+        fields = UsersBaseForm.Meta.fields
 
 
 class UsersEditForm(UsersBaseForm):
@@ -63,7 +64,7 @@ class UsersEditForm(UsersBaseForm):
     )
 
     class Meta(UsersBaseForm.Meta):
-        fields = UsersBaseForm.Meta.fields + ["password"]
+        fields = UsersBaseForm.Meta.fields
 
 
 class RolesForm(forms.ModelForm):
@@ -92,6 +93,7 @@ class SigninForm(forms.ModelForm):
 
 # users views
 @login_required
+@role_required("Admin")
 def users_list_view(request):
     users = Users.objects.all()
     active_nav = "users"
@@ -109,6 +111,7 @@ def users_list_view(request):
 
 
 @login_required
+@role_required("Admin")
 def users_add_view(request):
     active_nav = "users"
     active_page_title = "Users"
@@ -133,6 +136,7 @@ def users_add_view(request):
 
 
 @login_required
+@role_required("Admin")
 def users_edit_view(request, pk):
     user = get_object_or_404(Users, pk=pk)
     active_nav = "users"
@@ -160,6 +164,7 @@ def users_edit_view(request, pk):
 
 
 @login_required
+@role_required("Admin")
 def users_delete_view(request, pk):
     user = get_object_or_404(Users, pk=pk)
     active_nav = "users"
@@ -182,6 +187,7 @@ def users_delete_view(request, pk):
 
 # roles views
 @login_required
+@role_required("Admin")
 def roles_list_view(request):
     roles = Roles.objects.all()
     active_nav = "users"
@@ -197,6 +203,7 @@ def roles_list_view(request):
 
 
 @login_required
+@role_required("Admin")
 def roles_add_view(request):
     active_nav = "users"
 
@@ -219,6 +226,7 @@ def roles_add_view(request):
 
 
 @login_required
+@role_required("Admin")
 def roles_edit_view(request, pk):
     role = get_object_or_404(Roles, pk=pk)
     active_nav = "users"
@@ -242,6 +250,7 @@ def roles_edit_view(request, pk):
 
 
 @login_required
+@role_required("Admin")
 def roles_delete_view(request, pk):
     role = get_object_or_404(Roles, pk=pk)
     active_nav = "users"
