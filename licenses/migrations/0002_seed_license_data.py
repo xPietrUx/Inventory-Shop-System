@@ -33,7 +33,7 @@ def create_license_data(apps, schema_editor):
         license_key="PHOTOSHOP-KEY-456",
         purchase_date=timezone.now(),
         expiration_date=None,  # Perpetual license
-        user=None,  # Unassigned
+        user=bwayne,
     )
 
 
