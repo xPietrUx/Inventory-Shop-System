@@ -15,7 +15,9 @@ class HardwareCategory(models.Model):
 class Project(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
-    supervisor = models.ForeignKey(User, on_delete=models.CASCADE)
+    supervisor = models.ForeignKey(
+        User, on_delete=models.CASCADE, blank=True, null=True
+    )
     start_date = models.DateField()
     end_date = models.DateField(null=True)
 

@@ -132,6 +132,8 @@ class Migration(migrations.Migration):
                 (
                     "supervisor",
                     models.ForeignKey(
+                        blank=True,
+                        null=True,
                         on_delete=django.db.models.deletion.CASCADE,
                         to=settings.AUTH_USER_MODEL,
                     ),

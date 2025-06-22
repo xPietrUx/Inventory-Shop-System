@@ -15,8 +15,8 @@ def create_data(apps, schema_editor):
     cat3 = HardwareCategory.objects.create(name="Keyboard")
 
     # Create Projects
-    proj1 = Project.objects.create(name="Project Alpha")
-    proj2 = Project.objects.create(name="Project Beta")
+    proj1 = Project.objects.create(name="Project Alpha", start_date=timezone.now())
+    proj2 = Project.objects.create(name="Project Beta", start_date=timezone.now())
 
     # Create Users (assuming some users exist)
     # In a real scenario, you would fetch or create users.
