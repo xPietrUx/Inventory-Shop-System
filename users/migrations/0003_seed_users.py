@@ -35,10 +35,75 @@ def create_users(apps, schema_editor):
         },
     )
 
+    User.objects.get_or_create(
+        username="dprince",
+        defaults={
+            "first_name": "Diana",
+            "last_name": "Prince",
+            "email": "diana@themyscira.com",
+            "password": make_password("wonder"),
+            "role": admin_role,
+        },
+    )
+
+    User.objects.get_or_create(
+        username="ckent",
+        defaults={
+            "first_name": "Clark",
+            "last_name": "Kent",
+            "email": "clark@dailyplanet.com",
+            "password": make_password("superman"),
+            "role": operator_role,
+        },
+    )
+
+    User.objects.get_or_create(
+        username="pparker",
+        defaults={
+            "first_name": "Peter",
+            "last_name": "Parker",
+            "email": "peter@dailybugle.com",
+            "password": make_password("spidey"),
+            "role": operator_role,
+        },
+    )
+
+    User.objects.get_or_create(
+        username="tstark",
+        defaults={
+            "first_name": "Tony",
+            "last_name": "Stark",
+            "email": "tony@stark.com",
+            "password": make_password("ironman"),
+            "role": admin_role,
+        },
+    )
+
+    User.objects.get_or_create(
+        username="nromanoff",
+        defaults={
+            "first_name": "Natasha",
+            "last_name": "Romanoff",
+            "email": "natasha@shield.com",
+            "password": make_password("blackwidow"),
+            "role": operator_role,
+        },
+    )
+
 
 def remove_users(apps, schema_editor):
     User = apps.get_model("users", "User")
-    User.objects.filter(username__in=["bwayne", "jdoe"]).delete()
+    User.objects.filter(
+        username__in=[
+            "bwayne",
+            "jdoe",
+            "dprince",
+            "ckent",
+            "pparker",
+            "tstark",
+            "nromanoff",
+        ]
+    ).delete()
 
 
 class Migration(migrations.Migration):
