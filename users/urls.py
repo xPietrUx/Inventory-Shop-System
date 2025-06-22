@@ -14,6 +14,8 @@ urlpatterns = [
     path("roles/", views.roles_list_view, name="roles_list"),
     # redirect from / to users/
     path("", RedirectView.as_view(url="users/", permanent=False)),
+    # about view
+    path("about/", views.about_view, name="about"),
     # auth paths
     path("signin/", views.signin_view, name="signin"),
     path("signout/", views.signout_view, name="signout"),

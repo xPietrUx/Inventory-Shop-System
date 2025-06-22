@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 
 
-def role_required(*allowed_roles, redirect_to="hardware:hardware_list"):
+def role_required(*allowed_roles, redirect_to="users:about"):
     def decorator(view_func):
         @wraps(view_func)
         def _wrapped_view(request, *args, **kwargs):

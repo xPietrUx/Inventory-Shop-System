@@ -1,0 +1,45 @@
+.about-section {
+    background-color: var(--container-bg);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    border: var(--border-width) solid var(--primary-color);
+}
+
+.about-section h2,
+.about-section h3 {
+    color: var(--primary-color);
+    margin-top: 0;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.about-section p {
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.authors-container {
+    display: flex;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+}
+
+.author-card {
+    flex: 1;
+    min-width: 250px;
+    background-color: var(--body-bg);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--accent-color-light);
+}
+
+.author-card h4 {
+    margin-top: 0;
+    color: var(--accent-color);
+}
+
+main > container {
+    width: 100% !important;
+}
