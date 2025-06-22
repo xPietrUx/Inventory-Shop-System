@@ -7,7 +7,7 @@ def create_roles(apps, schema_editor):
         name="Admin", description="Administrator role with full permissions."
     )
     Role.objects.create(
-        name="Operator", descrption="Operator role with limited permissions."
+        name="Operator", description="Operator role with limited permissions."
     )
 
 
