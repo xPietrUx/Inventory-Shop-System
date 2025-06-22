@@ -6,6 +6,21 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from utils.decorators import role_required
 
+# about views
+
+
+def about_view(request):
+    active_nav = "about"
+    active_page_title = "About"
+    return render(
+        request,
+        "about.html",
+        {
+            "active_nav": active_nav,
+            "active_page_title": active_page_title,
+        },
+    )
+
 
 class UserBaseForm(forms.ModelForm):
     class Meta:
