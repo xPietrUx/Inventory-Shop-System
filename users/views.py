@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Users, Roles
+from .models import User, Role
 from django import forms
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import login, logout, authenticate
@@ -7,22 +7,22 @@ from django.contrib.auth.decorators import login_required
 from utils.decorators import role_required
 
 
-class UsersBaseForm(forms.ModelForm):
+class UserBaseForm(forms.ModelForm):
     class Meta:
-        model = Users
+        model = User
         fields = [
-            "name",
-            "surname",
+            "first_name",
+            "last_name",
             "position",
-            "id_role",
+            "role",
             "email",
             "username",
         ]
         widgets = {
-            "name": forms.TextInput(
+            "first_name": forms.TextInput(
                 attrs={"placeholder": "First Name"},
             ),
-            "surname": forms.TextInput(
+            "last_name": forms.TextInput(
                 attrs={"placeholder": "Last Name"},
             ),
             "position": forms.TextInput(
@@ -46,16 +46,16 @@ class UsersBaseForm(forms.ModelForm):
         return user
 
 
-class UsersAddForm(UsersBaseForm):
+class UserAddForm(UserBaseForm):
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={"placeholder": "Password"}), required=True
     )
 
-    class Meta(UsersBaseForm.Meta):
-        fields = UsersBaseForm.Meta.fields
+    class Meta(UserBaseForm.Meta):
+        fields = UserBaseForm.Meta.fields
 
 
-class UsersEditForm(UsersBaseForm):
+class UserEditForm(UserBaseForm):
     password = forms.CharField(
         widget=forms.PasswordInput(
             attrs={"placeholder": "Leave blank to keep the current password."}
@@ -63,26 +63,26 @@ class UsersEditForm(UsersBaseForm):
         required=False,
     )
 
-    class Meta(UsersBaseForm.Meta):
-        fields = UsersBaseForm.Meta.fields
+    class Meta(UserBaseForm.Meta):
+        fields = UserBaseForm.Meta.fields
 
 
-class RolesForm(forms.ModelForm):
+class RoleForm(forms.ModelForm):
     class Meta:
-        model = Roles
+        model = Role
         fields = [
-            "role_name",
+            "name",
             "description",
         ]
         widgets = {
-            "role_name": forms.TextInput(attrs={"placeholder": "Name"}),
+            "name": forms.TextInput(attrs={"placeholder": "Name"}),
             "description": forms.TextInput(attrs={"placeholder": "Description"}),
         }
 
 
 class SigninForm(forms.ModelForm):
     class Meta:
-        model = Users
+        model = User
         fields = ["username", "password"]
 
         widgets = {
@@ -95,9 +95,9 @@ class SigninForm(forms.ModelForm):
 @login_required
 @role_required("Admin")
 def users_list_view(request):
-    users = Users.objects.all()
+    users = User.objects.all()
     active_nav = "users"
-    active_page_title = "Users"
+    active_page_title = "User"
 
     return render(
         request,
@@ -114,15 +114,15 @@ def users_list_view(request):
 @role_required("Admin")
 def users_add_view(request):
     active_nav = "users"
-    active_page_title = "Users"
+    active_page_title = "User"
 
     if request.method == "POST":
-        form = UsersAddForm(request.POST)
+        form = UserAddForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect("users:users_list")
     else:
-        form = UsersAddForm()
+        form = UserAddForm()
 
     return render(
         request,
@@ -138,18 +138,18 @@ def users_add_view(request):
 @login_required
 @role_required("Admin")
 def users_edit_view(request, pk):
-    user = get_object_or_404(Users, pk=pk)
+    user = get_object_or_404(User, pk=pk)
     active_nav = "users"
     active_page_title = f"Edit User: {user.username}"
 
     if request.method == "POST":
-        form = UsersEditForm(request.POST, instance=user)
+        form = UserEditForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
             return redirect("users:users_list")
 
     else:
-        form = UsersEditForm(instance=user)
+        form = UserEditForm(instance=user)
 
     return render(
         request,
@@ -166,7 +166,7 @@ def users_edit_view(request, pk):
 @login_required
 @role_required("Admin")
 def users_delete_view(request, pk):
-    user = get_object_or_404(Users, pk=pk)
+    user = get_object_or_404(User, pk=pk)
     active_nav = "users"
     active_page_title = f"Delete User: {user.username}"
 
@@ -189,7 +189,7 @@ def users_delete_view(request, pk):
 @login_required
 @role_required("Admin")
 def roles_list_view(request):
-    roles = Roles.objects.all()
+    roles = Role.objects.all()
     active_nav = "users"
 
     return render(
@@ -208,12 +208,12 @@ def roles_add_view(request):
     active_nav = "users"
 
     if request.method == "POST":
-        form = RolesForm(request.POST)
+        form = RoleForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect("users:roles_list")
     else:
-        form = RolesForm()
+        form = RoleForm()
 
     return render(
         request,
@@ -228,16 +228,16 @@ def roles_add_view(request):
 @login_required
 @role_required("Admin")
 def roles_edit_view(request, pk):
-    role = get_object_or_404(Roles, pk=pk)
+    role = get_object_or_404(Role, pk=pk)
     active_nav = "users"
 
     if request.method == "POST":
-        form = RolesForm(request.POST, instance=role)
+        form = RoleForm(request.POST, instance=role)
         if form.is_valid():
             form.save()
             return redirect("users:roles_list")
     else:
-        form = RolesForm(instance=role)
+        form = RoleForm(instance=role)
 
     return render(
         request,
@@ -252,7 +252,7 @@ def roles_edit_view(request, pk):
 @login_required
 @role_required("Admin")
 def roles_delete_view(request, pk):
-    role = get_object_or_404(Roles, pk=pk)
+    role = get_object_or_404(Role, pk=pk)
     active_nav = "users"
 
     if request.method == "POST":

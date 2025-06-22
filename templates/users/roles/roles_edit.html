@@ -34,9 +34,9 @@
             <form method="post">
                 {% csrf_token %}
                 <div class="form-group">
-                    <label for="id_role_name">Name:</label>
-                    {{ form.role_name }}
-                    {% if form.role_name.errors %}<div class="form-error">{{ form.role_name.errors }}</div>{% endif %}
+                    <label for="id_name">Name:</label>
+                    {{ form.name }}
+                    {% if form.name.errors %}<div class="form-error">{{ form.name.errors }}</div>{% endif %}
                 </div>
                 <div class="form-group">
                     <label for="id_description">Description:</label>

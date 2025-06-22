@@ -104,7 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = "users.Users"
+AUTH_USER_MODEL = "users.User"
 
 LOGIN_URL = "/signin/"
 
