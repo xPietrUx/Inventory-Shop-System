@@ -108,7 +108,7 @@ class SigninForm(forms.ModelForm):
 
 # users views
 @login_required
-@role_required("Admin")
+@role_required("Admin", redirect_to="hardware:hardware_list")
 def users_list_view(request):
     users = User.objects.all()
     active_nav = "users"
@@ -126,7 +126,7 @@ def users_list_view(request):
 
 
 @login_required
-@role_required("Admin")
+@role_required("Admin", redirect_to="hardware:hardware_list")
 def users_add_view(request):
     active_nav = "users"
     active_page_title = "User"
@@ -151,7 +151,7 @@ def users_add_view(request):
 
 
 @login_required
-@role_required("Admin")
+@role_required("Admin", redirect_to="hardware:hardware_list")
 def users_edit_view(request, pk):
     user = get_object_or_404(User, pk=pk)
     active_nav = "users"
@@ -179,7 +179,7 @@ def users_edit_view(request, pk):
 
 
 @login_required
-@role_required("Admin")
+@role_required("Admin", redirect_to="hardware:hardware_list")
 def users_delete_view(request, pk):
     user = get_object_or_404(User, pk=pk)
     active_nav = "users"
@@ -202,7 +202,7 @@ def users_delete_view(request, pk):
 
 # roles views
 @login_required
-@role_required("Admin")
+@role_required("Admin", redirect_to="hardware:hardware_list")
 def roles_list_view(request):
     roles = Role.objects.all()
     active_nav = "users"
