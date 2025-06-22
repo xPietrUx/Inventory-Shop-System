@@ -26,7 +26,6 @@
     <container>
     <content-nav>
         <a href="{% url 'users:roles_list' %}" class="action-tab selected">View Roles</a>
-        <a href="{% url 'users:roles_add' %}" class="action-tab">Add Roles</a>
     </content-nav>
     <content>
         <div class="user-list-header">
@@ -49,9 +48,6 @@
                         <p>
                             <strong>Description:</strong> {{ role.description }}
                         </p>
-                        <h3>Actions</h3>
-                        <a href="{% url 'users:roles_edit' pk=role.pk %}" class="edit">Edit</a>
-                        <a href="{% url 'users:roles_delete' pk=role.pk %}" class="delete">Delete</a>
                     </div>
                 </div>
             {% empty %}
