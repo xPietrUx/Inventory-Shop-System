@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    About
+{% endblock title %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/about.css' %}" />
+{% endblock extra_css %}
+{% block page_title %}
+    About the Project
+{% endblock page_title %}
+{% block content %}
+    <container>
+    <content>
+        <div class="about-section">
+            <h2>Inventory & Shop System</h2>
+            <p>
+                This project is a comprehensive inventory and license management system designed to help organizations track their hardware, software licenses, and assigned projects efficiently.
+            </p>
+            <p>
+                Built with Django, this application provides a robust backend and a clean, user-friendly interface for managing assets and user roles.
+            </p>
+        </div>
+        <div class="about-section">
+            <h3>Authors</h3>
+            <div class="authors-container">
+                <div class="author-card">
+                    <h4>Dominik Meisner</h4>
+                    <p>Lead Developer & Backend Architect</p>
+                    <p>
+                        Architect of the application's core logic. Responsible for designing the robust backend, creating API endpoints, and ensuring system scalability and performance.
+                    </p>
+                    <a href="https://github.com/b14ucky">https://github.com/b14ucky</a>
+                </div>
+                <div class="author-card">
+                    <h4>Piotr Dusiński</h4>
+                    <p>Full Stack & Frontend Architect</p>
+                    <p>
+                        Master of the user-facing experience. Responsible for developing the responsive frontend, integrating it with the backend, and architecting the overall application flow.
+                    </p>
+                    <a href="https://github.com/xPietrUx">https://github.com/xPietrUx</a>
+                </div>
+                <div class="author-card">
+                    <h4>Bartek Janoszka</h4>
+                    <p>DevOps & Cybersecurity</p>
+                    <p>
+                        Guardian of the infrastructure and security. Manages the deployment pipeline, containerization with Docker, and implements security measures to protect the application.
+                    </p>
+                    <a href="https://github.com/BartekJ0110">https://github.com/BartekJ0110</a>
+                </div>
+                <div class="author-card">
+                    <h4>Mikołaj Molenda</h4>
+                    <p>Database Manager & Database Architect</p>
+                    <p>
+                        Curator of the data. Designs and optimizes the database schema, manages data integrity, and ensures efficient data retrieval and storage.
+                    </p>
+                    <a href="https://github.com/Misiek66">https://github.com/Misiek66</a>
+                </div>
+            </div>
+        </div>
+    </content>
+    </container>
+{% endblock content %}
