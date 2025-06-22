@@ -62,10 +62,10 @@
                             <strong>Warranty To:</strong> {{ hw.warranty_to }}
                         </p>
                         <p>
-                            <strong>Assigned User:</strong> {{ hw.user_id.username|default:"-" }}
+                            <strong>Assigned User:</strong> {{ hw.user.username|default:"-" }}
                         </p>
                         <p>
-                            <strong>Assigned Project:</strong> {{ hw.project_id.name|default:"-" }}
+                            <strong>Assigned Project:</strong> {{ hw.project.name|default:"-" }}
                         </p>
                         <h3>Actions</h3>
                         <a href="{% url 'hardware:hardware_edit' pk=hw.pk %}" class="edit">Edit</a>

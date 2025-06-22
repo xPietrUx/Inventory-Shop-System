@@ -4,22 +4,17 @@ from django.db import models
 # Create your models here.
 
 
-class Roles(models.Model):
-    role_name = models.CharField(max_length=255)
+class Role(models.Model):
+    name = models.CharField(max_length=255)
     description = models.TextField()
 
     def __str__(self):
-        return self.role_name
+        return self.name
 
 
-class Users(AbstractUser):
-    name = models.CharField(max_length=255)
-    surname = models.CharField(max_length=255)
-    email = models.EmailField(unique=True)
+class User(AbstractUser):
     position = models.CharField(max_length=255)
-    id_role = models.ForeignKey(
-        Roles, on_delete=models.SET_NULL, null=True, blank=True, related_name="users"
-    )
+    role = models.ForeignKey(Role, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.name} {self.surname} ({self.username})"
+        return f"{self.first_name} {self.last_name} ({self.username})"

@@ -13,9 +13,9 @@ class Software(models.Model):
 
 
 class License(models.Model):
-    software_id = models.ForeignKey(Software, on_delete=models.CASCADE)
+    software = models.ForeignKey(Software, on_delete=models.CASCADE)
     license_key = models.CharField(max_length=50, null=False)
     purchase_date = models.DateField()
     expiration_date = models.DateField(null=True)
     license_type = models.CharField(max_length=50)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)

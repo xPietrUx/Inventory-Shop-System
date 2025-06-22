@@ -41,17 +41,17 @@
                 <div class="user-item">
                     <div class="user-summary">
                         <span class="user-id">{{ user.id }}</span>
-                        <span class="user-name">{{ user.name }}</span>
+                        <span class="user-name">{{ user.first_name }}</span>
                         <span class="user-email">{{ user.email }}</span>
                         <span class="user-role">{{ user.position }}</span>
                         <span class="expand-icon">▼</span>
                     </div>
                     <div class="user-details">
                         <p>
-                            <strong>First Name:</strong> {{ user.name }}
+                            <strong>First Name:</strong> {{ user.first_name }}
                         </p>
                         <p>
-                            <strong>Last Name:</strong> {{ user.surname }}
+                            <strong>Last Name:</strong> {{ user.last_name }}
                         </p>
                         <p>
                             <strong>E-mail:</strong> {{ user.email }}
@@ -61,8 +61,8 @@
                         </p>
                         <p>
                             <strong>Role:</strong>
-                            {% if user.id_role %}
-                                {{ user.id_role.role_name }}
+                            {% if user.role %}
+                                {{ user.role.name }}
                             {% else %}
                                 No role assigned
                             {% endif %}
