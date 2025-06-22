@@ -51,7 +51,8 @@
             {% endif %}
           </li>
           <li>
-            <a href="" class="{% if active_nav == 'about' %}selected{% endif %}">About</a>
+            <a href="{% url 'users:about' %}"
+               class="{% if active_nav == 'about' %}selected{% endif %}">About</a>
           </li>
         </ul>
       </nav>
