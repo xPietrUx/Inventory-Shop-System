@@ -35,7 +35,7 @@
             <span>Date</span>
             <span>Hardware</span>
             <span>Event Type</span>
-            <span>Description</span>
+            <span class="expand-icon-header"></span>
         </div>
         <div class="user-list">
             {% for item in history_list %}
@@ -44,7 +44,12 @@
                         <span>{{ item.event_date }}</span>
                         <span>{{ item.hardware_id.name }} ({{ item.hardware_id.inventory_number }})</span>
                         <span>{{ item.get_event_type_display }}</span>
-                        <span>{{ item.description }}</span>
+                        <span class="expand-icon">▼</span>
+                    </div>
+                    <div class="user-details">
+                        <p>
+                            <strong>Description:</strong> {{ item.description }}
+                        </p>
                     </div>
                 </div>
             {% empty %}
