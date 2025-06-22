@@ -15,7 +15,7 @@ class HardwareCategory(models.Model):
 class Project(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
-    supervisor_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    supervisor = models.ForeignKey(User, on_delete=models.CASCADE)
     start_date = models.DateField()
     end_date = models.DateField(null=True)
 
@@ -32,7 +32,7 @@ class Hardware(models.Model):
 
     inventory_number = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
-    category_id = models.ForeignKey(HardwareCategory, on_delete=models.CASCADE)
+    category = models.ForeignKey(HardwareCategory, on_delete=models.CASCADE)
     serial_number = models.CharField(max_length=100)
     purchase_date = models.DateField()
     warranty_to = models.DateField()
@@ -41,10 +41,8 @@ class Hardware(models.Model):
         choices=HardwareStatus,
         default=HardwareStatus.IN_STORAGE,
     )
-    user_id = models.ForeignKey(
-        User, on_delete=models.CASCADE, null=True, blank=True
-    )
-    project_id = models.ForeignKey(
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    project = models.ForeignKey(
         Project, on_delete=models.CASCADE, null=True, blank=True
     )
 
@@ -55,8 +53,8 @@ class Hardware(models.Model):
         if not is_new:
             old_obj = Hardware.objects.get(pk=self.pk)
             old_status = old_obj.status
-            old_user = old_obj.user_id
-            old_project = old_obj.project_id
+            old_user = old_obj.user
+            old_project = old_obj.project
 
         # 1. if status is set to "In storage", "In repair" or "Utilized",
         #    hardware cannot be assigned to any project nor user
@@ -69,10 +67,10 @@ class Hardware(models.Model):
             ]
             and self.status != old_status
         ):
-            self.user_id = None
-            self.project_id = None
+            self.user = None
+            self.project = None
         # 2. if hardware is assigned to user or project its status HAS to be "In use"
-        elif self.user_id or self.project_id:
+        elif self.user or self.project:
             self.status = self.HardwareStatus.IN_USE
         # 3. if hardware is not assigned, and status is not "In repair" nor "Utilized",
         #    then its default status is "In storage"
@@ -83,7 +81,7 @@ class Hardware(models.Model):
 
         if is_new:
             HardwareHistory.objects.create(
-                hardware_id=self,
+                hardware=self,
                 event_date=timezone.now(),
                 event_type=HardwareHistory.EventType.CREATED,
                 description="Hardware created and added to storage.",
@@ -91,8 +89,8 @@ class Hardware(models.Model):
         else:
             if (
                 old_status != self.status
-                or old_user != self.user_id
-                or old_project != self.project_id
+                or old_user != self.user
+                or old_project != self.project
             ):
                 event_type = None
                 description = ""
@@ -100,10 +98,10 @@ class Hardware(models.Model):
                 if self.status == self.HardwareStatus.IN_USE:
                     event_type = HardwareHistory.EventType.ASSIGNED
                     desc_parts = []
-                    if self.user_id:
-                        desc_parts.append(f"user: {self.user_id}")
-                    if self.project_id:
-                        desc_parts.append(f"project: {self.project_id}")
+                    if self.user:
+                        desc_parts.append(f"user: {self.user}")
+                    if self.project:
+                        desc_parts.append(f"project: {self.project}")
                     description = f"Assigned to {' and '.join(desc_parts)}."
                 elif self.status == self.HardwareStatus.IN_STORAGE:
                     event_type = HardwareHistory.EventType.RETURNED
@@ -117,7 +115,7 @@ class Hardware(models.Model):
 
                 if event_type:
                     HardwareHistory.objects.create(
-                        hardware_id=self,
+                        hardware=self,
                         event_date=timezone.now(),
                         event_type=event_type,
                         description=description,
@@ -135,7 +133,7 @@ class HardwareHistory(models.Model):
         UTILIZED = "UTILIZED", "Utilized"
         CREATED = "CREATED", "Created"
 
-    hardware_id = models.ForeignKey(Hardware, on_delete=models.CASCADE)
+    hardware = models.ForeignKey(Hardware, on_delete=models.CASCADE)
     event_date = models.DateField()
     event_type = models.CharField(
         max_length=10, choices=EventType.choices, default=EventType.CREATED
