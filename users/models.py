@@ -9,7 +9,7 @@ class Roles(models.Model):
     description = models.TextField()
 
     def __str__(self):
-        return f"Role: {self.role_name}. Description: {self.description}"
+        return self.role_name
 
 
 class Users(AbstractUser):
@@ -22,4 +22,4 @@ class Users(AbstractUser):
     )
 
     def __str__(self):
-        return f"{self.name} {self.surname}. Position: {self.position}"
+        return f"{self.name} {self.surname} ({self.username})"
