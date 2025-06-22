@@ -23,9 +23,9 @@ class LicenseForm(forms.ModelForm):
     class Meta:
         model = License
         fields = [
-            "software_id",
+            "software",
             "license_key",
-            "user_id",
+            "user",
             "purchase_date",
             "expiration_date",
             "license_type",

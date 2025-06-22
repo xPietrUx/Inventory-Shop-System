@@ -41,23 +41,23 @@
                 <div class="user-item">
                     <div class="user-summary">
                         <span class="user-id">{{ lic.id }}</span>
-                        <span class="user-name">{{ lic.software_id.name }}</span>
+                        <span class="user-name">{{ lic.software.name }}</span>
                         <span class="user-email">{{ lic.license_key }}</span>
-                        <span class="user-role">{{ lic.user_id.username }}</span>
+                        <span class="user-role">{{ lic.user.username }}</span>
                         <span class="expand-icon">▼</span>
                     </div>
                     <div class="user-details">
                         <p>
-                            <strong>Software:</strong> {{ lic.software_id.name }}
+                            <strong>Software:</strong> {{ lic.software.name }}
                         </p>
                         <p>
-                            <strong>Producer:</strong> {{ lic.software_id.producer }}
+                            <strong>Producer:</strong> {{ lic.software.producer }}
                         </p>
                         <p>
                             <strong>License Key:</strong> {{ lic.license_key }}
                         </p>
                         <p>
-                            <strong>User:</strong> {{ lic.user_id.name }} {{ lic.user_id.surname }} ({{ lic.user_id.username }})
+                            <strong>User:</strong> {{ lic.user.name }} {{ lic.user.surname }} ({{ lic.user.username }})
                         </p>
                         <p>
                             <strong>Purchase Date:</strong> {{ lic.purchase_date }}

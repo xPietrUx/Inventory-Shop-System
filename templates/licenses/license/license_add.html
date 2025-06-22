@@ -33,9 +33,9 @@
             <form method="post">
                 {% csrf_token %}
                 <div class="form-group">
-                    <label for="id_software_id">Software:</label>
-                    {{ form.software_id }}
-                    {% if form.software_id.errors %}<div class="form-error">{{ form.software_id.errors }}</div>{% endif %}
+                    <label for="id_software">Software:</label>
+                    {{ form.software }}
+                    {% if form.software.errors %}<div class="form-error">{{ form.software.errors }}</div>{% endif %}
                 </div>
                 <div class="form-group">
                     <label for="id_license_key">License Key:</label>
@@ -43,9 +43,9 @@
                     {% if form.license_key.errors %}<div class="form-error">{{ form.license_key.errors }}</div>{% endif %}
                 </div>
                 <div class="form-group">
-                    <label for="id_user_id">User:</label>
-                    {{ form.user_id }}
-                    {% if form.user_id.errors %}<div class="form-error">{{ form.user_id.errors }}</div>{% endif %}
+                    <label for="id_user">User:</label>
+                    {{ form.user }}
+                    {% if form.user.errors %}<div class="form-error">{{ form.user.errors }}</div>{% endif %}
                 </div>
                 <div class="form-group">
                     <label for="id_purchase_date">Purchase Date:</label>
