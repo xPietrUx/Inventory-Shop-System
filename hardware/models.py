@@ -129,7 +129,7 @@ class Hardware(models.Model):
 
 class HardwareHistory(models.Model):
     class EventType(models.TextChoices):
-        ASSIGNED = "ASSIGNED", "Assigned to user"
+        ASSIGNED = "ASSIGNED", "Assigned to user and/or project"
         RETURNED = "RETURNED", "Returned to storage"
         REPAIR = "REPAIR", "Sent for repair"
         UTILIZED = "UTILIZED", "Utilized"
